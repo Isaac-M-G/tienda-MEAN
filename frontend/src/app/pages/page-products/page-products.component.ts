@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
-import { CardProductComponent } from '../../components/card-product/card-product.component';
-
+import { Component } from "@angular/core";
+import { SharedModule } from "../../shared/shared.module";
 @Component({
   selector: 'app-page-products',
   standalone: true,
-  imports: [CardProductComponent],
+  imports: [SharedModule],
   templateUrl: './page-products.component.html',
   styleUrls: ['./page-products.component.css']
 })
