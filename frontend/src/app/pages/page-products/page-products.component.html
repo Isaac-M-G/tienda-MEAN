@@ -1,0 +1,15 @@
+<div>
+  <h1>Productos Disponibles</h1>
+  <h1 class="text-3xl font-bold color-red text-center mb-6">Productos Disponibles</h1>
+  
+  <div class="productos-grid">
+    <app-card-product
+      *ngFor="let producto of productos"
+      [title]="producto.title"
+      [description]="producto.description"
+      [price]="producto.price"
+      [imageUrl]="producto.imageUrl"
+    >
+    </app-card-product>
+  </div>
+</div>
