@@ -1,16 +1,28 @@
-import { Component } from "@angular/core";
-import { SharedModule } from "../../shared/shared.module";
+import { Component, OnInit } from '@angular/core';
+import { SharedModule } from '../../shared/shared.module';
+import { ProductService, Product } from '../../service/product.service';
+import { ProductFormComponent } from '../../components/product-form/product-form.component';
+import { CardProductComponent } from '../../components/card-product/card-product.component';
+
 @Component({
   selector: 'app-page-products',
   standalone: true,
-  imports: [SharedModule],
+  imports: [SharedModule, ProductFormComponent, CardProductComponent],
   templateUrl: './page-products.component.html',
-  styleUrls: ['./page-products.component.css']
+  styleUrls: ['./page-products.component.css'],
 })
-export class PageProductsComponent {
-  productos = [
-    { title: 'Laptop Gamer', description: '16GB RAM, RTX 4060', price: 1500, imageUrl: 'https://via.placeholder.com/250x150' },
-    { title: 'Mouse Inalámbrico', description: 'Ergonómico y recargable', price: 25, imageUrl: 'https://via.placeholder.com/250x150' },
-    { title: 'Teclado Mecánico', description: 'Switches rojos', price: 80, imageUrl: 'https://via.placeholder.com/250x150' }
-  ];
+export class PageProductsComponent implements OnInit {
+  products: Product[] = [];
+
+  constructor(private productService: ProductService) {}
+
+  ngOnInit(): void {
+    this.productService.getProducts().subscribe({
+      next: (res) => {
+        this.products = res;
+        // console.log('Productos cargados:', res);
+      },
+      error: (err) => console.error('Error al cargar productos:', err),
+    });
+  }
 }

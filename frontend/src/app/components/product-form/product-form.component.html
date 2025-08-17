@@ -1,0 +1,47 @@
+<form
+  [formGroup]="productForm"
+  (ngSubmit)="submitForm()"
+  class="max-w-md mx-auto p-4 border rounded shadow"
+>
+  <div class="mb-4">
+    <label class="block font-bold mb-1">Título:</label>
+    <input
+      type="text"
+      formControlName="name"
+      class="w-full border rounded px-2 py-1"
+    />
+  </div>
+
+  <div class="mb-4">
+    <label class="block font-bold mb-1">Descripción:</label>
+    <textarea
+      formControlName="description"
+      class="w-full border rounded px-2 py-1"
+    ></textarea>
+  </div>
+
+  <div class="mb-4">
+    <label class="block font-bold mb-1">Imagen:</label>
+    <input
+      type="file"
+      (change)="onFileSelected($event)"
+      class="w-full border rounded px-2 py-1"
+    />
+  </div>
+
+  <div class="mb-4">
+    <label class="block font-bold mb-1">Precio:</label>
+    <input
+      type="number"
+      formControlName="price"
+      class="w-full border rounded px-2 py-1"
+    />
+  </div>
+
+  <button
+    type="submit"
+    class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+  >
+    Crear Producto
+  </button>
+</form>

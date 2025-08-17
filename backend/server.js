@@ -11,9 +11,17 @@ app.use(cors());
 app.use(express.json());
 
 // Conexión a MongoDB
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log("✅ MongoDB conectado"))
-  .catch(err => console.log("❌ Error MongoDB:", err));
+  .catch((err) => console.log("❌ Error MongoDB:", err));
+
+// Rutas
+const productRoutes = require("./routes/Products");
+app.use("/products", productRoutes);
 
 // Ruta de prueba
 app.get("/", (req, res) => {

@@ -1,0 +1,59 @@
+import { Component } from '@angular/core';
+import { SharedModule } from '../../shared/shared.module';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Product, ProductService } from '../../service/product.service';
+import { FirebaseService } from '../../service/firebase.service';
+
+@Component({
+  selector: 'app-product-form',
+  standalone: true,
+  imports: [SharedModule],
+  templateUrl: './product-form.component.html',
+  styleUrls: ['./product-form.component.css'],
+})
+export class ProductFormComponent {
+  productForm: FormGroup;
+  selectedFile: File | null = null;
+
+  constructor(
+    private fb: FormBuilder,
+    private productService: ProductService,
+    private firebaseService: FirebaseService
+  ) {
+    this.productForm = this.fb.group({
+      name: ['', Validators.required],
+      description: ['', Validators.required],
+      price: [0, [Validators.required, Validators.min(0)]],
+      imageUrl: ['', Validators.required],
+    });
+  }
+
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
+
+      this.productForm.patchValue({ imageUrl: this.selectedFile.name });
+      this.productForm.get('imageUrl')?.updateValueAndValidity();
+    }
+  }
+
+  async submitForm() {
+    if (!this.productForm.valid) return;
+
+    let imageUrl = '';
+    if (this.selectedFile) {
+      imageUrl = await this.firebaseService.uploadImage(this.selectedFile);
+    }
+
+    const product: Product = { ...this.productForm.value, imageUrl };
+
+    this.productService.createProduct(product).subscribe({
+      next: () => {
+        this.productForm.reset();
+        this.selectedFile = null;
+      },
+      error: (err) => console.error('Error al crear producto:', err),
+    });
+  }
+}
