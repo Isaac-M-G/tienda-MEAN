@@ -1,46 +1,88 @@
 <form
   [formGroup]="productForm"
   (ngSubmit)="submitForm()"
-  class="max-w-md mx-auto p-4 border rounded shadow"
+  class="max-w-md mx-auto p-6 border rounded-lg shadow-lg bg-white"
 >
+  <!-- Título -->
   <div class="mb-4">
     <label class="block font-bold mb-1">Título:</label>
     <input
       type="text"
       formControlName="name"
-      class="w-full border rounded px-2 py-1"
+      class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
     />
+    <p
+      *ngIf="
+        productForm.get('name')?.invalid &&
+        (productForm.get('name')?.touched || productForm.get('name')?.dirty)
+      "
+      class="text-red-600 text-sm mt-1"
+    >
+      El título es obligatorio.
+    </p>
   </div>
 
+  <!-- Descripción -->
   <div class="mb-4">
     <label class="block font-bold mb-1">Descripción:</label>
     <textarea
       formControlName="description"
-      class="w-full border rounded px-2 py-1"
+      class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
     ></textarea>
+    <p
+      *ngIf="
+        productForm.get('description')?.invalid &&
+        (productForm.get('description')?.touched ||
+          productForm.get('description')?.dirty)
+      "
+      class="text-red-600 text-sm mt-1"
+    >
+      La descripción es obligatoria.
+    </p>
   </div>
 
+  <!-- Imagen -->
   <div class="mb-4">
     <label class="block font-bold mb-1">Imagen:</label>
     <input
       type="file"
       (change)="onFileSelected($event)"
-      class="w-full border rounded px-2 py-1"
+      class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
     />
+    <p
+      *ngIf="
+        productForm.get('imageUrl')?.invalid &&
+        (productForm.get('imageUrl')?.touched ||
+          productForm.get('imageUrl')?.dirty)
+      "
+      class="text-red-600 text-sm mt-1"
+    >
+      Debes seleccionar una imagen.
+    </p>
   </div>
 
+  <!-- Precio -->
   <div class="mb-4">
     <label class="block font-bold mb-1">Precio:</label>
     <input
       type="number"
       formControlName="price"
-      class="w-full border rounded px-2 py-1"
+      class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
     />
+    <p
+      *ngIf="
+        productForm.get('price')?.invalid &&
+        (productForm.get('price')?.touched || productForm.get('price')?.dirty)
+      "
+      class="text-red-600 text-sm mt-1"
+    >
+      El precio es obligatorio y debe ser mayor o igual a 0.
+    </p>
   </div>
 
   <button
     type="submit"
-    class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+    class="w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
   >
     Crear Producto
   </button>

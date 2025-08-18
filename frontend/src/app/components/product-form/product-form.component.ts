@@ -30,15 +30,21 @@ export class ProductFormComponent {
 
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
+
     if (input.files && input.files.length > 0) {
       this.selectedFile = input.files[0];
-
       this.productForm.patchValue({ imageUrl: this.selectedFile.name });
-      this.productForm.get('imageUrl')?.updateValueAndValidity();
+    } else {
+      // No se seleccionó ningún archivo
+      this.selectedFile = null;
+      this.productForm.patchValue({ imageUrl: '' });
     }
+    this.productForm.get('imageUrl')?.updateValueAndValidity();
   }
 
   async submitForm() {
+    this.productForm.markAllAsTouched();
+
     if (!this.productForm.valid) return;
 
     let imageUrl = '';

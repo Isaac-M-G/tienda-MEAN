@@ -1,9 +1,15 @@
-<div>
-  <h1 class="text-3xl font-bold text-red-500 text-center mb-6">
+<div class="max-w-7xl mx-auto px-4 py-8">
+  <!-- Título -->
+  <h1
+    class="text-4xl md:text-5xl font-extrabold text-red-600 text-center mb-10 drop-shadow-md"
+  >
     Productos Disponibles
   </h1>
 
-  <div class="productos-grid">
+  <!-- Grid de productos -->
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-10"
+  >
     <div *ngFor="let product of products">
       <app-card-product
         [id]="product._id!"
@@ -11,10 +17,12 @@
         [description]="product.description"
         [price]="product.price"
         [imageUrl]="product.imageUrl"
-      >
-      </app-card-product>
+      ></app-card-product>
     </div>
   </div>
 
-  <app-product-form></app-product-form>
+  <!-- Formulario -->
+  <div class="bg-white shadow-lg rounded-xl p-6 max-w-3xl mx-auto">
+    <app-product-form></app-product-form>
+  </div>
 </div>
