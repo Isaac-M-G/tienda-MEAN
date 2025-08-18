@@ -1,19 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { SharedModule } from '../../shared/shared.module';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Product, ProductService } from '../../service/product.service';
 import { FirebaseService } from '../../service/firebase.service';
-
+import { TopAlertComponent } from '../top-alert/top-alert.component';
 @Component({
   selector: 'app-product-form',
   standalone: true,
-  imports: [SharedModule],
+  imports: [SharedModule, TopAlertComponent],
   templateUrl: './product-form.component.html',
   styleUrls: ['./product-form.component.css'],
 })
 export class ProductFormComponent {
   productForm: FormGroup;
   selectedFile: File | null = null;
+
+  @ViewChild('topAlert') topAlert!: TopAlertComponent;
 
   constructor(
     private fb: FormBuilder,
@@ -58,6 +60,7 @@ export class ProductFormComponent {
       next: () => {
         this.productForm.reset();
         this.selectedFile = null;
+        this.topAlert?.show('Producto creado con éxito', 'success');
       },
       error: (err) => console.error('Error al crear producto:', err),
     });
