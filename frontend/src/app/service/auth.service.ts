@@ -27,10 +27,10 @@ export class AuthService {
   }
 
   /** Registro de usuario */
-  register(email: string, password: string) {
+  register(email: string, password: string, role: string) {
     return this.http.post(
       `${GlobalVariables.apiUrl}/${GlobalVariables.apiEndpoints.auth.register}`,
-      { email, password }
+      { email, password, role }
     );
   }
 

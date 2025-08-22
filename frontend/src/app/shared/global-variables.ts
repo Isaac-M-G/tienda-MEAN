@@ -16,13 +16,14 @@ export const GlobalVariables = {
 
     /** Rutas de productos */
     products: {
+      create: 'products/create',
       editBase: 'products/edit', // parte fija de la ruta dinámica
       edit: (id: string) => `products/edit/${id}`, // ruta completa con id
       default: '',
     },
   },
 
-  /** Endpoints del backend (API) */
+  /** Endpoints del backend (API)  debe coincidir con los del backend */
   apiEndpoints: {
     auth: {
       login: 'auth/login',
@@ -37,4 +38,8 @@ export const GlobalVariables = {
 
   /** Configuración de Firebase Storage */
   firebaseStorageBaseUrl: `https://firebasestorage.googleapis.com/v0/b/${environment.firebase.storageBucket}/o/`,
+
+  productCategories: ['audifonos', 'monitores', 'teclados', 'cables'],
+
+  roles: ['user', 'admin'], // debe coincidir con los roles en el backend
 };

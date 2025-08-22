@@ -24,6 +24,7 @@ export class ProductEditComponent implements OnInit {
   productForm!: FormGroup;
   selectedFile: File | null = null;
   productId: string | null = null;
+  categories = GlobalVariables.productCategories;
   currentImageUrl: string = '';
 
   constructor(

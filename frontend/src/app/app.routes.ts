@@ -6,6 +6,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { AuthGuard } from './service/auth.guard';
 import { GlobalVariables } from './shared/global-variables';
+import { CreateProductComponent } from './pages/create-product/create-product.component';
 
 export const routes: Routes = [
   { path: GlobalVariables.appRoutes.home, component: PageProductsComponent },
@@ -13,6 +14,10 @@ export const routes: Routes = [
     path: `${GlobalVariables.appRoutes.products.editBase}/:id`,
     component: ProductEditComponent,
     canActivate: [AuthGuard],
+  },
+  {
+    path: GlobalVariables.appRoutes.products.create,
+    component: CreateProductComponent,
   },
   { path: GlobalVariables.appRoutes.register, component: RegisterComponent },
   { path: GlobalVariables.appRoutes.login, component: LoginComponent },

@@ -1,10 +1,52 @@
-<form [formGroup]="registerForm" (ngSubmit)="submit()">
-  <input type="email" formControlName="email" placeholder="Email" />
-  <input type="password" formControlName="password" placeholder="Contraseña" />
+<form [formGroup]="registerForm" (ngSubmit)="submit()" class="space-y-4">
+  <input
+    type="email"
+    formControlName="email"
+    placeholder="Email"
+    class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+  />
+  <input
+    type="password"
+    formControlName="password"
+    placeholder="Contraseña"
+    class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+  />
   <input
     type="password"
     formControlName="confirmPassword"
     placeholder="Confirmar Contraseña"
+    class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
   />
-  <button type="submit">Registrarse</button>
+
+  <!-- Select de rol -->
+  <div class="mb-4">
+    <label class="block font-bold mb-1">Rol:</label>
+    <select
+      formControlName="role"
+      class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+    >
+      <option [ngValue]="null">Selecciona un rol</option>
+      <option *ngFor="let role of globalVariables.roles" [value]="role">
+        {{ role | titlecase }}
+      </option>
+    </select>
+
+    <!-- Mensaje de error -->
+    <p
+      *ngIf="
+        registerForm.get('role')?.invalid &&
+        (registerForm.get('role')?.dirty || registerForm.get('role')?.touched)
+      "
+      class="text-red-600 text-sm mt-1"
+    >
+      Debes seleccionar un rol.
+    </p>
+  </div>
+
+  <button
+    type="submit"
+    class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+  >
+    Registrarse
+  </button>
 </form>

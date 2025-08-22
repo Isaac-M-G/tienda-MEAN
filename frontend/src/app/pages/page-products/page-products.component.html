@@ -1,4 +1,9 @@
 <div class="max-w-7xl mx-auto px-4 py-8">
+  <app-filter-search
+    [items]="allProducts"
+    [fields]="['name', 'description', 'price']"
+    (filtered)="onProductsFiltered($event)"
+  ></app-filter-search>
   <!-- Título -->
   <h1
     class="text-4xl md:text-5xl font-extrabold text-red-600 text-center mb-10 drop-shadow-md"
@@ -10,7 +15,7 @@
   <div
     class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-10"
   >
-    <div *ngFor="let product of products">
+    <div *ngFor="let product of filteredProducts">
       <app-card-product
         [id]="product._id!"
         [title]="product.name"
@@ -20,10 +25,8 @@
         [imageUrl]="product.imageUrl"
       ></app-card-product>
     </div>
-  </div>
-
-  <!-- Formulario -->
-  <div class="bg-white shadow-lg rounded-xl p-6 max-w-3xl mx-auto">
-    <app-product-form></app-product-form>
+    <div *ngIf="filteredProducts.length === 0">
+      <p>No se encontraron productos.</p>
+    </div>
   </div>
 </div>

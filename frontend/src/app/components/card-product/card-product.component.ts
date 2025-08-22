@@ -1,16 +1,20 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ProductService } from '../../service/product.service';
 import { FirebaseService } from '../../service/firebase.service';
 import { Router } from '@angular/router';
 import { GlobalVariables } from '../../shared/global-variables';
+import { AuthService } from '../../service/auth.service';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-card-product',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './card-product.component.html',
   styleUrls: ['./card-product.component.css'],
 })
 export class CardProductComponent {
+  isAdmin = false;
+
   @Input() id!: string;
   @Input() title: string = '';
   @Input() description: string = '';
@@ -21,8 +25,12 @@ export class CardProductComponent {
   constructor(
     private productService: ProductService,
     private firebaseService: FirebaseService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private authService: AuthService
+  ) {
+    const user = this.authService.getUserInfo();
+    this.isAdmin = user?.role === 'admin';
+  }
 
   onDelete() {
     if (!this.id) {

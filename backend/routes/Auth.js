@@ -7,7 +7,7 @@ const router = express.Router();
 
 // Registro
 router.post("/register", async (req, res) => {
-  const { email, password, role } = req.body; // <-- agregamos role
+  const { email, password, role } = req.body;
 
   try {
     const existingUser = await User.findOne({ email });
@@ -16,21 +16,24 @@ router.post("/register", async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Validamos el rol y usamos "user" si no se proporciona o es inválido
-    const userRole = ["user", "admin"].includes(role) ? role : "user";
-
-    const user = await User.create({
+    const user = new User({
       email,
       password: hashedPassword,
-      role: userRole,
+      role,
     });
+
+    const savedUser = await user.save();
 
     res.status(201).json({
       message: "Usuario creado",
-      userId: user._id,
-      role: user.role,
+      userId: savedUser._id,
+      role: savedUser.role,
     });
   } catch (err) {
+    // Si mongoose lanza error de validación lo manejamos aquí
+    if (err.name === "ValidationError") {
+      return res.status(400).json({ message: err.message });
+    }
     res.status(500).json({ message: err.message });
   }
 });
@@ -52,7 +55,7 @@ router.post("/login", async (req, res) => {
     const payload = {
       userId: user._id,
       email: user.email,
-      role: user.role || "user", // <- si tu esquema User tiene 'role'
+      role: user.role || "user",
     };
 
     const token = jwt.sign(payload, process.env.JWT_SECRET, {

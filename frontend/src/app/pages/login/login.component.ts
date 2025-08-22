@@ -5,7 +5,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
 import { GlobalVariables } from '../../shared/global-variables';
 import { AlertService } from '../../service/alert.service';
@@ -13,13 +13,14 @@ import { AlertService } from '../../service/alert.service';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
   loginForm: FormGroup;
-
+  routes = GlobalVariables.appRoutes;
+  
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,

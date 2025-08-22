@@ -47,10 +47,12 @@ export class LeftbarComponent implements OnInit {
 
     // En cualquier otra ruta → mostrar este menú
     this.menuItems = [
-      { label: 'Dashboard', link: this.routes.dashboard },
       { label: 'Productos', link: this.routes.products.default },
-      { label: 'Login', link: this.routes.login },
-      { label: 'Registro', link: this.routes.register },
+      {
+        label: 'Crear Producto',
+        link: this.routes.products.create,
+        adminOnly: true,
+      },
     ];
 
     // Filtrar adminOnly si fuera necesario

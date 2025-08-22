@@ -20,6 +20,7 @@ import { CommonModule } from '@angular/common';
 })
 export class RegisterComponent {
   registerForm: FormGroup;
+  globalVariables = GlobalVariables;
 
   constructor(
     private fb: FormBuilder,
@@ -29,22 +30,23 @@ export class RegisterComponent {
   ) {
     this.registerForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
+      role: [null, Validators.required],
     });
   }
 
   submit() {
     if (!this.registerForm.valid) return;
 
-    const { email, password, confirmPassword } = this.registerForm.value;
+    const { email, password, confirmPassword, role } = this.registerForm.value;
 
     if (password !== confirmPassword) {
       this.alertService.show('Las contraseñas no coinciden', 'error');
       return;
     }
 
-    this.auth.register(email, password).subscribe({
+    this.auth.register(email, password, role).subscribe({
       next: () => {
         this.alertService.show('Usuario registrado con éxito', 'success');
         this.router.navigate([GlobalVariables.appRoutes.login]);

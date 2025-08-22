@@ -90,11 +90,10 @@
         formControlName="category"
         class="w-full border rounded px-2 py-1"
       >
-        <option value="">Selecciona una categoría</option>
-        <option value="audifonos">Audífonos</option>
-        <option value="monitores">Monitores</option>
-        <option value="teclados">Teclados</option>
-        <option value="cables">Cables</option>
+        <option [ngValue]="null">Selecciona una categoría</option>
+        <option *ngFor="let cat of categories" [value]="cat">
+          {{ cat | titlecase }}
+        </option>
       </select>
     </div>
 
