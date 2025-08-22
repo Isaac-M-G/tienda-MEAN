@@ -6,11 +6,12 @@ import { TopbarComponent } from '../topbar/topbar.component';
 import { LeftbarComponent } from '../leftbar/leftbar.component';
 import { CommonModule } from '@angular/common';
 import { TopAlertComponent } from '../top-alert/top-alert.component';
+import { PopAlertComponent } from '../pop-alert/pop-alert.component';
 
 @Component({
   selector: 'app-layout',
   standalone: true,
-  imports: [RouterOutlet, TopbarComponent, LeftbarComponent, CommonModule, TopAlertComponent],
+  imports: [RouterOutlet, TopbarComponent, LeftbarComponent, CommonModule, TopAlertComponent, PopAlertComponent],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.css',
 })
