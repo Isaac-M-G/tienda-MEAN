@@ -1,9 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
 import { SharedModule } from '../../shared/shared.module';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Product, ProductService } from '../../service/product.service';
+import { ProductService } from '../../service/product.service';
 import { FirebaseService } from '../../service/firebase.service';
 import { TopAlertComponent } from '../top-alert/top-alert.component';
+import { AlertService } from '../../service/alert.service';
+import { Product } from '../../interfaces/product.interface';
 @Component({
   selector: 'app-product-form',
   standalone: true,
@@ -20,7 +22,8 @@ export class ProductFormComponent {
   constructor(
     private fb: FormBuilder,
     private productService: ProductService,
-    private firebaseService: FirebaseService
+    private firebaseService: FirebaseService,
+    private alertService: AlertService
   ) {
     this.productForm = this.fb.group({
       name: ['', Validators.required],
@@ -60,7 +63,7 @@ export class ProductFormComponent {
       next: () => {
         this.productForm.reset();
         this.selectedFile = null;
-        this.topAlert?.show('Producto creado con éxito', 'success');
+        this.alertService.show('Producto creado con éxito', 'success');
       },
       error: (err) => console.error('Error al crear producto:', err),
     });

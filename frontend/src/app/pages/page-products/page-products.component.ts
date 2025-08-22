@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedModule } from '../../shared/shared.module';
-import { ProductService, Product } from '../../service/product.service';
-import { ProductFormComponent } from '../../components/product-form/product-form.component';
-import { CardProductComponent } from '../../components/card-product/card-product.component';
+import { ProductService } from '../../service/product.service';
 import { AuthService } from '../../service/auth.service';
+import { Product } from '../../interfaces/product.interface';
 
 @Component({
   selector: 'app-page-products',
   standalone: true,
-  imports: [SharedModule, ProductFormComponent, CardProductComponent],
+  imports: [SharedModule],
   templateUrl: './page-products.component.html',
   styleUrls: ['./page-products.component.css'],
 })

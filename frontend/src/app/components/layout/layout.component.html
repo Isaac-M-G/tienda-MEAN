@@ -3,7 +3,7 @@
   <app-topbar *ngIf="showTopbar" (toggleSidebar)="toggleSidebar()"></app-topbar>
 
   <div class="flex flex-1">
-    <app-leftbar *ngIf="showLeftbar"></app-leftbar>
+    <app-leftbar [class.hidden]="!showLeftbar"></app-leftbar>
 
     <main class="flex-1 p-4 overflow-y-auto">
       <router-outlet></router-outlet>

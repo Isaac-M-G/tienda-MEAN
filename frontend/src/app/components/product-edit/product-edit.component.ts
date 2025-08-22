@@ -1,20 +1,18 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Product, ProductService } from '../../service/product.service';
+import { ProductService } from '../../service/product.service';
 import { FirebaseService } from '../../service/firebase.service';
 import { TopAlertComponent } from '../top-alert/top-alert.component';
+import { AlertService } from '../../service/alert.service';
+import { GlobalVariables } from '../../shared/global-variables';
+import { Product } from '../../interfaces/product.interface';
+import { SharedModule } from '../../shared/shared.module';
 
 @Component({
   selector: 'app-product-edit',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, TopAlertComponent],
+  imports: [SharedModule],
   templateUrl: './product-edit.component.html',
   styleUrls: ['./product-edit.component.css'],
 })
@@ -31,7 +29,8 @@ export class ProductEditComponent implements OnInit {
     private productService: ProductService,
     private firebaseService: FirebaseService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private alertService: AlertService
   ) {}
 
   ngOnInit() {
@@ -105,12 +104,9 @@ export class ProductEditComponent implements OnInit {
         next: () => {
           // console.log('Producto actualizado');
           // Mostrar alerta
-          this.topAlert?.show('Producto actualizado con éxito', 'success');
+          this.alertService.show('Producto actualizado con éxito', 'success');
 
-          // Esperar 1.5 segundos antes de redirigir
-          setTimeout(() => {
-            this.router.navigate(['']);
-          }, 1500);
+          this.router.navigate([GlobalVariables.appRoutes.products.default]);
         },
         error: (err) => console.error('Error al actualizar producto:', err),
       });

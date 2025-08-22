@@ -1,11 +1,11 @@
 <div
-  *ngIf="visible"
+  *ngIf="alert$ | async as alert"
   [ngClass]="{
-    'bg-green-100 border-green-500 text-green-700': type === 'success',
-    'bg-red-100 border-red-500 text-red-700': type === 'error'
+    'bg-green-100 border-green-500 text-green-700': alert.type === 'success',
+    'bg-red-100 border-red-500 text-red-700': alert.type === 'error'
   }"
   class="fixed top-4 left-1/2 transform -translate-x-1/2 border px-4 py-3 rounded shadow-lg transition-opacity duration-500"
 >
-  <span class="block sm:inline">{{ message }}</span>
-  <button class="ml-4 font-bold" (click)="close()">×</button>
+  <span class="block sm:inline">{{ alert.message }}</span>
+  <button class="ml-4 font-bold" (click)="alertService.clear()">×</button>
 </div>

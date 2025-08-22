@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
+import { GlobalVariables } from '../shared/global-variables';
 
 /**
  * Guard de autenticación.
@@ -13,10 +14,10 @@ export class AuthGuard implements CanActivate {
   constructor(private router: Router) {}
 
   canActivate(): boolean {
-    const token = localStorage.getItem('authToken'); // Debe coincidir con AuthService
+    const token = localStorage.getItem(GlobalVariables.authTokenKey); // <-- key global
 
     if (!token) {
-      this.router.navigate(['/login']); // Si no hay token → login
+      this.router.navigate([GlobalVariables.appRoutes.login]); // <-- ruta global
       return false;
     }
     return true; // Hay token → permite acceso

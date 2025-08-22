@@ -4,11 +4,19 @@ import { CommonModule } from '@angular/common';
 import { TopbarComponent } from '../topbar/topbar.component';
 import { LeftbarComponent } from '../leftbar/leftbar.component';
 import { AuthService } from '../../service/auth.service';
+import { GlobalVariables } from '../../shared/global-variables';
+import { SharedModule } from '../../shared/shared.module';
 
 @Component({
   selector: 'app-layout',
   standalone: true,
-  imports: [RouterOutlet, TopbarComponent, LeftbarComponent, CommonModule],
+  imports: [
+    RouterOutlet,
+    TopbarComponent,
+    LeftbarComponent,
+    CommonModule,
+    SharedModule,
+  ],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.css',
 })
@@ -17,20 +25,26 @@ export class LayoutComponent implements OnInit {
   showLeftbar = true;
   canToggleLeftbar = true;
 
-  private hideTopbarRoutes: string[] = ['/login', '/register'];
+  private hideTopbarRoutes: string[] = [
+    // '/' + GlobalVariables.appRoutes.login,
+    // '/' + GlobalVariables.appRoutes.register,
+  ];
+
   private hideLeftbarRoutes: string[] = [
-    '/login',
-    '/register',
-    '/products/edit',
+    '/' + GlobalVariables.appRoutes.login,
+    '/' + GlobalVariables.appRoutes.register,
+    '/' + GlobalVariables.appRoutes.products.editBase,
   ];
 
   constructor(private router: Router, private auth: AuthService) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         const currentUrl = event.url;
+
         this.showTopbar = !this.hideTopbarRoutes.some((route) =>
           currentUrl.startsWith(route)
         );
+
         this.showLeftbar = !this.hideLeftbarRoutes.some((route) =>
           currentUrl.startsWith(route)
         );

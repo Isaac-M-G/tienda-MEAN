@@ -3,6 +3,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { ProductService } from '../../service/product.service';
 import { FirebaseService } from '../../service/firebase.service';
 import { Router } from '@angular/router';
+import { GlobalVariables } from '../../shared/global-variables';
 @Component({
   selector: 'app-card-product',
   standalone: true,
@@ -52,7 +53,7 @@ export class CardProductComponent {
       return;
     }
     // Navegar a la ruta de edición
-    this.router.navigate(['/products/edit', this.id]);
+    this.router.navigate([GlobalVariables.appRoutes.products.edit(this.id)]);
   }
 
   hideCard() {

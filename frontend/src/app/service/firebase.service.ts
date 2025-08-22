@@ -1,7 +1,14 @@
 import { Injectable } from '@angular/core';
-import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  deleteObject,
+} from 'firebase/storage';
 import { initializeApp } from 'firebase/app';
 import { environment } from '../enviroment/environment';
+import { GlobalVariables } from '../shared/global-variables';
 
 @Injectable({
   providedIn: 'root',
@@ -12,16 +19,21 @@ export class FirebaseService {
 
   constructor() {}
 
-  async uploadImage(file: File, path: string = 'products'): Promise<string> {
+  /** Sube una imagen a Firebase Storage */
+  async uploadImage(
+    file: File,
+    path: string = GlobalVariables.apiEndpoints.products.defaultFolder
+  ): Promise<string> {
     const storageRef = ref(this.storage, `${path}/${Date.now()}_${file.name}`);
     const snapshot = await uploadBytes(storageRef, file);
     return getDownloadURL(snapshot.ref);
   }
 
+  /** Elimina una imagen de Firebase Storage */
   async deleteImage(imageUrl: string): Promise<void> {
     try {
-      // ⚠️ Necesitas el path relativo del archivo en storage
-      const baseUrl = `https://firebasestorage.googleapis.com/v0/b/${environment.firebase.storageBucket}/o/`;
+      // Usamos la URL base global
+      const baseUrl = GlobalVariables.firebaseStorageBaseUrl;
       const filePath = decodeURIComponent(
         imageUrl.replace(baseUrl, '').split('?')[0]
       );

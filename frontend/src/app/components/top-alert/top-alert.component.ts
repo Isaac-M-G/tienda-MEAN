@@ -1,27 +1,21 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
+import { AlertService } from '../../service/alert.service';
+import { Observable } from 'rxjs';
+import { AlertMessage } from '../../interfaces/alert-message.interface';
+
 @Component({
   selector: 'app-top-alert',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, AsyncPipe],
   templateUrl: './top-alert.component.html',
   styleUrl: './top-alert.component.css',
 })
 export class TopAlertComponent {
-  @Input() type: 'success' | 'error' = 'success';
-  @Input() message: string = '';
-  visible: boolean = false;
+  alert$: Observable<AlertMessage | null>;
 
-  close() {
-    this.visible = false;
-  }
-
-  show(message: string, type: 'success' | 'error' = 'success') {
-    this.message = message;
-    this.type = type;
-    this.visible = true;
-
-    // Auto-hide después de 3 segundos
-    setTimeout(() => (this.visible = false), 3000);
+  constructor(public alertService: AlertService) {
+    this.alert$ = this.alertService.alerts$; // ✅ inicialización segura
   }
 }

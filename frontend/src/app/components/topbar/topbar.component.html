@@ -13,7 +13,19 @@
   </div>
 
   <ul class="flex gap-4">
-    <li><a routerLink="/home" class="hover:underline">Home</a></li>
-    <li><a routerLink="/products" class="hover:underline">Productos</a></li>
+    <li>
+      <a [routerLink]="['/', routes.home]" class="hover:underline">Home</a>
+    </li>
+    <li>
+      <a [routerLink]="['/', routes.products.default]" class="hover:underline"
+        >Productos</a
+      >
+    </li>
+    <li *ngIf="!isLoggedIn()">
+      <a [routerLink]="['/', routes.login]" class="hover:underline">Login</a>
+    </li>
+    <li *ngIf="isLoggedIn()">
+      <button (click)="logout()" class="hover:underline">Logout</button>
+    </li>
   </ul>
 </nav>
