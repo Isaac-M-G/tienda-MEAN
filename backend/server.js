@@ -23,6 +23,10 @@ mongoose
 const productRoutes = require("./routes/Products");
 app.use("/products", productRoutes);
 
+const authRoutes = require("./routes/Auth");
+app.use("/auth", authRoutes);
+
+
 // Ruta de prueba
 app.get("/", (req, res) => {
   res.json("API funcionando 🚀");

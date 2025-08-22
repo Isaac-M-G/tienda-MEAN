@@ -1,0 +1,19 @@
+<nav
+  class="bg-blue-600 text-white p-4 flex justify-between items-center shadow-md"
+>
+  <div class="flex items-center gap-4">
+    <!-- Botón hamburguesa -->
+    <button
+      class="px-2 py-1 bg-blue-500 rounded hover:bg-blue-700"
+      (click)="onToggleSidebar()"
+    >
+      ☰
+    </button>
+    <h1 class="text-xl font-bold">Mi Proyecto</h1>
+  </div>
+
+  <ul class="flex gap-4">
+    <li><a routerLink="/home" class="hover:underline">Home</a></li>
+    <li><a routerLink="/products" class="hover:underline">Productos</a></li>
+  </ul>
+</nav>

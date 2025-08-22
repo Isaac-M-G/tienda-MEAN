@@ -3,6 +3,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { ProductService, Product } from '../../service/product.service';
 import { ProductFormComponent } from '../../components/product-form/product-form.component';
 import { CardProductComponent } from '../../components/card-product/card-product.component';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-page-products',
@@ -14,7 +15,10 @@ import { CardProductComponent } from '../../components/card-product/card-product
 export class PageProductsComponent implements OnInit {
   products: Product[] = [];
 
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.productService.getProducts().subscribe({
