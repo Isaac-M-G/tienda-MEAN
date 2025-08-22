@@ -30,9 +30,11 @@ export class LeftbarComponent implements OnInit {
         this.updateMenuItems();
       });
 
-    // Detecta rol del usuario
-    const user = this.auth.getUserInfo();
-    this.isAdmin = user?.role === 'admin';
+    // Detecta cambios de usuario
+    this.auth.user$.subscribe((user) => {
+      this.isAdmin = user?.role === 'admin';
+      this.updateMenuItems();
+    });
   }
 
   private updateMenuItems() {

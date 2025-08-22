@@ -1,27 +1,35 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { GlobalVariables } from '../shared/global-variables';
 import { jwtDecode } from 'jwt-decode';
 import { AuthInfo } from '../interfaces/auth.interface';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  private userSubject = new BehaviorSubject(this.getUserInfo());
+  user$ = this.userSubject.asObservable();
+
+  constructor(private http: HttpClient, private router: Router) {}
 
   /** Login → pide token al backend y lo guarda en localStorage */
   login(email: string, password: string): Observable<{ token: string }> {
     return this.http
       .post<{ token: string }>(
-        `${GlobalVariables.apiUrl}/${GlobalVariables.apiEndpoints.auth.login}`, // <-- endpoint global
+        `${GlobalVariables.apiUrl}/${GlobalVariables.apiEndpoints.auth.login}`,
         { email, password }
       )
       .pipe(
         tap((res) => {
-          localStorage.setItem(GlobalVariables.authTokenKey, res.token); // <-- token global
+          // Guardar token
+          localStorage.setItem(GlobalVariables.authTokenKey, res.token);
+
+          // Actualizar observable para que los componentes sepan que hubo login
+          this.userSubject.next(this.getUserInfo());
         })
       );
   }
@@ -37,6 +45,7 @@ export class AuthService {
   /** Elimina el token al cerrar sesión */
   logout() {
     localStorage.removeItem(GlobalVariables.authTokenKey);
+    this.userSubject.next(null);
   }
 
   /** Devuelve el token actual o null */

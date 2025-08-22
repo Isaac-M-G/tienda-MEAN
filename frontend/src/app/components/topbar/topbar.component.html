@@ -1,31 +1,28 @@
+<!-- Topbar fijo y scrollable -->
 <nav
-  class="bg-blue-600 text-white p-4 flex justify-between items-center shadow-md"
+  class="fixed top-0 left-0 right-0 h-16 bg-blue-600 text-white flex items-center px-4 shadow-md z-50 overflow-x-auto"
 >
-  <div class="flex items-center gap-4">
+  <div class="flex items-center gap-4 flex-shrink-0">
     <!-- Botón hamburguesa -->
     <button
-      class="px-2 py-1 bg-blue-500 rounded hover:bg-blue-700"
-      (click)="onToggleSidebar()"
+      class="px-2 py-1 bg-blue-500 rounded hover:bg-blue-700 flex-shrink-0"
+      (click)="toggleSidebar.emit()"
     >
       ☰
     </button>
-    <h1 class="text-xl font-bold">Mi Proyecto</h1>
+    <h1 class="text-xl font-bold flex-shrink-0">Mi Proyecto</h1>
   </div>
 
-  <ul class="flex gap-4">
-    <li>
-      <a [routerLink]="['/', routes.home]" class="hover:underline">Home</a>
+  <!-- Menú horizontal scrollable -->
+  <ul class="flex gap-4 ml-auto whitespace-nowrap">
+    <li *ngFor="let item of menuItems">
+      <a [routerLink]="item.link" class="hover:underline">
+        {{ item.label }}
+      </a>
     </li>
-    <li>
-      <a [routerLink]="['/', routes.products.default]" class="hover:underline"
-        >Productos</a
-      >
-    </li>
-    <li *ngIf="!isLoggedIn()">
-      <a [routerLink]="['/', routes.login]" class="hover:underline">Login</a>
-    </li>
+
     <li *ngIf="isLoggedIn()">
-      <button (click)="logout()">Logout</button>
+      <a (click)="logout()" class="hover:underline">Logout</a>
     </li>
   </ul>
 </nav>

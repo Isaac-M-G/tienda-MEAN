@@ -9,18 +9,19 @@ import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
 import { GlobalVariables } from '../../shared/global-variables';
 import { AlertService } from '../../service/alert.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterModule],
+  imports: [ReactiveFormsModule, RouterModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
   loginForm: FormGroup;
   routes = GlobalVariables.appRoutes;
-  
+
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
@@ -34,6 +35,8 @@ export class LoginComponent {
   }
 
   submit() {
+    this.loginForm.markAllAsTouched();
+
     if (!this.loginForm.valid) return;
 
     const { email, password } = this.loginForm.value;
@@ -45,7 +48,11 @@ export class LoginComponent {
       },
       error: (err) => {
         console.error('Login fallido', err);
-        this.alertService.show('Login fallido', 'error');
+
+        // Dependiendo de tu backend, el mensaje puede estar en err.error.message
+        const errorMessage =
+          err?.error?.message || 'Usuario o contraseña incorrectos';
+        this.alertService.show(errorMessage, 'error');
       },
     });
   }

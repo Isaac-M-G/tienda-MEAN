@@ -1,8 +1,67 @@
-<form [formGroup]="loginForm" (ngSubmit)="submit()">
-  <input type="email" formControlName="email" placeholder="Email" />
-  <input type="password" formControlName="password" placeholder="Contraseña" />
-  <button type="submit">Ingresar</button>
-  <a [routerLink]="['/', routes.register]">
-    ¿No tienes una cuenta? Regístrate
-  </a>
+<form
+  [formGroup]="loginForm"
+  (ngSubmit)="submit()"
+  class="max-w-sm mx-auto mt-10 p-6 bg-white rounded-xl shadow-md space-y-4"
+>
+  <h2 class="text-2xl font-bold text-gray-800 text-center">Iniciar Sesión</h2>
+
+  <!-- Email -->
+  <div>
+    <input
+      type="email"
+      formControlName="email"
+      placeholder="Email"
+      class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
+    />
+    <p
+      *ngIf="
+        loginForm.get('email')?.invalid &&
+        (loginForm.get('email')?.touched || loginForm.get('email')?.dirty)
+      "
+      class="text-red-600 text-sm mt-1"
+    >
+      <span *ngIf="loginForm.get('email')?.errors?.['required']"
+        >El email es obligatorio.</span
+      >
+      <span *ngIf="loginForm.get('email')?.errors?.['email']"
+        >El email no tiene un formato válido.</span
+      >
+    </p>
+  </div>
+
+  <!-- Contraseña -->
+  <div>
+    <input
+      type="password"
+      formControlName="password"
+      placeholder="Contraseña"
+      class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
+    />
+    <p
+      *ngIf="
+        loginForm.get('password')?.invalid &&
+        (loginForm.get('password')?.touched || loginForm.get('password')?.dirty)
+      "
+      class="text-red-600 text-sm mt-1"
+    >
+      La contraseña es obligatoria.
+    </p>
+  </div>
+
+  <!-- Botón -->
+  <button
+    type="submit"
+    class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200"
+  >
+    Ingresar
+  </button>
+
+  <p class="text-center text-gray-600">
+    ¿No tienes una cuenta?
+    <a
+      [routerLink]="['/', routes.register]"
+      class="text-blue-500 hover:underline"
+      >Regístrate</a
+    >
+  </p>
 </form>

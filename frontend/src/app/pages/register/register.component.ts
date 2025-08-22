@@ -5,7 +5,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
 import { AlertService } from '../../service/alert.service';
 import { GlobalVariables } from '../../shared/global-variables';
@@ -14,13 +14,14 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
 export class RegisterComponent {
   registerForm: FormGroup;
-  globalVariables = GlobalVariables;
+  globalVariables = GlobalVariables; // para usarlo en el template
+  routes = GlobalVariables.appRoutes; // para routerLink
 
   constructor(
     private fb: FormBuilder,
@@ -37,6 +38,8 @@ export class RegisterComponent {
   }
 
   submit() {
+    this.registerForm.markAllAsTouched();
+
     if (!this.registerForm.valid) return;
 
     const { email, password, confirmPassword, role } = this.registerForm.value;

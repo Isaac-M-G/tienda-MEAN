@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterModule, RouterOutlet } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
 import { GlobalVariables } from '../../shared/global-variables';
 import { TopbarComponent } from '../topbar/topbar.component';
@@ -11,7 +11,7 @@ import { PopAlertComponent } from '../pop-alert/pop-alert.component';
 @Component({
   selector: 'app-layout',
   standalone: true,
-  imports: [RouterOutlet, TopbarComponent, LeftbarComponent, CommonModule, TopAlertComponent, PopAlertComponent],
+  imports: [RouterOutlet, TopbarComponent, LeftbarComponent, CommonModule, TopAlertComponent, PopAlertComponent, RouterModule],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.css',
 })

@@ -19,6 +19,20 @@ export class TopbarComponent {
   /** Rutas globales para usar en el template */
   routes = GlobalVariables.appRoutes;
 
+  // Array de links del menú
+  get menuItems() {
+    const items = [
+      { label: 'Home', link: ['/', this.routes.home] },
+      { label: 'Productos', link: ['/', this.routes.products.default] },
+    ];
+
+    if (!this.isLoggedIn()) {
+      items.push({ label: 'Login', link: ['/', this.routes.login] });
+    }
+
+    return items;
+  }
+
   constructor(
     private auth: AuthService,
     private router: Router,

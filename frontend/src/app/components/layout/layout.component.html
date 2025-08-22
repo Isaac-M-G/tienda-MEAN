@@ -1,14 +1,28 @@
 <!-- layout.component.html -->
 <app-top-alert></app-top-alert>
 <app-pop-alert></app-pop-alert>
+<!-- Contenedor general -->
+<div class="h-screen flex flex-col">
+  <!-- Topbar fijo y scrollable si hay mucho contenido -->
+  <div
+    *ngIf="showTopbar"
+    class="fixed top-0 left-0 right-0 z-50 max-h-20 overflow-y-auto bg-blue-600"
+  >
+    <app-topbar (toggleSidebar)="toggleSidebar()"></app-topbar>
+  </div>
 
-<div class="flex flex-col h-screen">
-  <app-topbar *ngIf="showTopbar" (toggleSidebar)="toggleSidebar()"></app-topbar>
+  <!-- Contenedor principal -->
+  <div class="flex flex-1 pt-[64px]">
+    <!-- Leftbar fijo y scrollable -->
+    <aside
+      class="w-64 bg-gray-100 border-r p-4 overflow-y-auto fixed top-[64px] bottom-0"
+      [class.hidden]="!showLeftbar"
+    >
+      <app-leftbar></app-leftbar>
+    </aside>
 
-  <div class="flex flex-1">
-    <app-leftbar [class.hidden]="!showLeftbar"></app-leftbar>
-
-    <main class="flex-1 p-4 overflow-y-auto">
+    <!-- Main content -->
+    <main class="flex-1 ml-64 p-4 overflow-y-auto h-[calc(100vh-64px)]">
       <router-outlet></router-outlet>
     </main>
   </div>
