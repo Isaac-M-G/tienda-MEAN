@@ -44,6 +44,7 @@ export class ProductEditComponent implements OnInit {
       description: ['', Validators.required],
       price: [0, [Validators.required, Validators.min(0)]],
       imageUrl: ['', Validators.required],
+      category: [null],
     });
 
     if (this.productId) {
@@ -59,7 +60,9 @@ export class ProductEditComponent implements OnInit {
           description: product.description,
           price: product.price,
           imageUrl: product.imageUrl,
+          category: product.category || null,
         });
+
         this.currentImageUrl = product.imageUrl;
       },
       error: (err) => console.error('Error al cargar producto:', err),

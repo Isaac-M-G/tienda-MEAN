@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -22,8 +22,6 @@ export class ProductFormComponent {
   productForm: FormGroup;
   selectedFile: File | null = null;
 
-  @ViewChild('topAlert') topAlert!: TopAlertComponent;
-
   constructor(
     private fb: FormBuilder,
     private productService: ProductService,
@@ -35,6 +33,7 @@ export class ProductFormComponent {
       description: ['', Validators.required],
       price: [0, [Validators.required, Validators.min(0)]],
       imageUrl: ['', Validators.required],
+      category: [null], 
     });
   }
 

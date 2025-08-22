@@ -14,6 +14,7 @@ export class CardProductComponent {
   @Input() id!: string;
   @Input() title: string = '';
   @Input() description: string = '';
+  @Input() category: string | null = null;
   @Input() price: number = 0;
   @Input() imageUrl: string = '';
 

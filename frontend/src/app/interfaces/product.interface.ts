@@ -4,4 +4,5 @@ export interface Product {
   description: string;
   price: number;
   imageUrl: string;
+  category?: 'audifonos' | 'monitores' | 'teclados' | 'cables' | null;
 }
