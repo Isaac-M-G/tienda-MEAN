@@ -1,22 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { TopbarComponent } from '../topbar/topbar.component';
-import { LeftbarComponent } from '../leftbar/leftbar.component';
 import { AuthService } from '../../service/auth.service';
 import { GlobalVariables } from '../../shared/global-variables';
-import { SharedModule } from '../../shared/shared.module';
+import { TopbarComponent } from '../topbar/topbar.component';
+import { LeftbarComponent } from '../leftbar/leftbar.component';
+import { CommonModule } from '@angular/common';
+import { TopAlertComponent } from '../top-alert/top-alert.component';
 
 @Component({
   selector: 'app-layout',
   standalone: true,
-  imports: [
-    RouterOutlet,
-    TopbarComponent,
-    LeftbarComponent,
-    CommonModule,
-    SharedModule,
-  ],
+  imports: [RouterOutlet, TopbarComponent, LeftbarComponent, CommonModule, TopAlertComponent],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.css',
 })
@@ -36,6 +30,9 @@ export class LayoutComponent implements OnInit {
     '/' + GlobalVariables.appRoutes.products.editBase,
   ];
 
+  /**
+   * Cambia los bar que se muestran según la ruta actual
+   */
   constructor(private router: Router, private auth: AuthService) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {

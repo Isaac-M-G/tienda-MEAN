@@ -2,17 +2,19 @@ import { Component } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
-  Validators,
   ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
+import { AlertService } from '../../service/alert.service';
+import { GlobalVariables } from '../../shared/global-variables';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
@@ -22,7 +24,8 @@ export class RegisterComponent {
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private alertService: AlertService
   ) {
     this.registerForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -37,16 +40,19 @@ export class RegisterComponent {
     const { email, password, confirmPassword } = this.registerForm.value;
 
     if (password !== confirmPassword) {
-      alert('Las contraseñas no coinciden');
+      this.alertService.show('Las contraseñas no coinciden', 'error');
       return;
     }
 
     this.auth.register(email, password).subscribe({
       next: () => {
-        alert('Usuario registrado con éxito');
-        this.router.navigate(['/login']);
+        this.alertService.show('Usuario registrado con éxito', 'success');
+        this.router.navigate([GlobalVariables.appRoutes.login]);
       },
-      error: (err) => console.error('Error al registrar usuario', err),
+      error: (err) => {
+        console.error('Error al registrar usuario', err);
+        this.alertService.show('Error al registrar usuario', 'error');
+      },
     });
   }
 }

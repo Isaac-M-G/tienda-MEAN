@@ -1,24 +1,26 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../../service/product.service';
 import { FirebaseService } from '../../service/firebase.service';
-import { TopAlertComponent } from '../top-alert/top-alert.component';
 import { AlertService } from '../../service/alert.service';
 import { GlobalVariables } from '../../shared/global-variables';
 import { Product } from '../../interfaces/product.interface';
-import { SharedModule } from '../../shared/shared.module';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-product-edit',
   standalone: true,
-  imports: [SharedModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './product-edit.component.html',
   styleUrls: ['./product-edit.component.css'],
 })
 export class ProductEditComponent implements OnInit {
-  @ViewChild('topAlert') topAlert?: TopAlertComponent;
-
   productForm!: FormGroup;
   selectedFile: File | null = null;
   productId: string | null = null;
@@ -102,13 +104,15 @@ export class ProductEditComponent implements OnInit {
       .updateProduct(this.productId, updatedProduct)
       .subscribe({
         next: () => {
-          // console.log('Producto actualizado');
           // Mostrar alerta
           this.alertService.show('Producto actualizado con éxito', 'success');
 
           this.router.navigate([GlobalVariables.appRoutes.products.default]);
         },
-        error: (err) => console.error('Error al actualizar producto:', err),
+        error: (err) => {
+          console.error('Error al actualizar producto:', err);
+          this.alertService.show('Error al actualizar producto', 'error');
+        },
       });
   }
 }

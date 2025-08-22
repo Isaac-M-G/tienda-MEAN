@@ -1,5 +1,4 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { SharedModule } from '../../shared/shared.module';
 import { ProductService } from '../../service/product.service';
 import { FirebaseService } from '../../service/firebase.service';
 import { Router } from '@angular/router';
@@ -7,7 +6,7 @@ import { GlobalVariables } from '../../shared/global-variables';
 @Component({
   selector: 'app-card-product',
   standalone: true,
-  imports: [SharedModule],
+  imports: [],
   templateUrl: './card-product.component.html',
   styleUrls: ['./card-product.component.css'],
 })
@@ -32,9 +31,7 @@ export class CardProductComponent {
 
     this.productService.deleteProduct(this.id).subscribe({
       next: async () => {
-        console.log(`Producto con id ${this.id} borrado`);
-
-        // 🗑️ También eliminar la imagen en Firebase
+        //  eliminar la imagen en Firebase
         if (this.imageUrl) {
           await this.firebaseService.deleteImage(this.imageUrl);
         }

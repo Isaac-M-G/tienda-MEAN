@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, NavigationEnd, RouterModule } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
 import { GlobalVariables } from '../../shared/global-variables';
 import { filter } from 'rxjs/operators';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-leftbar',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterModule],
   templateUrl: './leftbar.component.html',
   styleUrl: './leftbar.component.css',
 })
@@ -42,13 +41,11 @@ export class LeftbarComponent implements OnInit {
       this.currentUrl.includes('/' + this.routes.login) ||
       this.currentUrl.includes('/' + this.routes.register)
     ) {
-      console.log('esta cosa esta en login o register');
       this.menuItems = [{ label: 'Home', link: this.routes.home }];
       return;
     }
 
-    console.log('esta cosa no esta en login o register');
-    // En cualquier otra ruta → mostrar el menú completo
+    // En cualquier otra ruta → mostrar este menú
     this.menuItems = [
       { label: 'Dashboard', link: this.routes.dashboard },
       { label: 'Productos', link: this.routes.products.default },

@@ -1,15 +1,20 @@
 import { Component, ViewChild } from '@angular/core';
-import { SharedModule } from '../../shared/shared.module';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ProductService } from '../../service/product.service';
 import { FirebaseService } from '../../service/firebase.service';
 import { TopAlertComponent } from '../top-alert/top-alert.component';
 import { AlertService } from '../../service/alert.service';
 import { Product } from '../../interfaces/product.interface';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-product-form',
   standalone: true,
-  imports: [SharedModule, TopAlertComponent],
+  imports: [TopAlertComponent, ReactiveFormsModule, CommonModule],
   templateUrl: './product-form.component.html',
   styleUrls: ['./product-form.component.css'],
 })
@@ -63,6 +68,7 @@ export class ProductFormComponent {
       next: () => {
         this.productForm.reset();
         this.selectedFile = null;
+        // Mostrar alerta
         this.alertService.show('Producto creado con éxito', 'success');
       },
       error: (err) => console.error('Error al crear producto:', err),

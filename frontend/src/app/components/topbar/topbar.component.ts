@@ -1,12 +1,13 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { GlobalVariables } from '../../shared/global-variables';
 import { AuthService } from '../../service/auth.service';
-import { SharedModule } from '../../shared/shared.module';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-topbar',
   standalone: true,
-  imports: [SharedModule],
+  imports: [RouterModule, CommonModule],
   templateUrl: './topbar.component.html',
   styleUrl: './topbar.component.css',
 })
