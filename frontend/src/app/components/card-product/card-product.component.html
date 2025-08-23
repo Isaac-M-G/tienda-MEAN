@@ -12,18 +12,9 @@
     <p class="text-lg font-bold text-green-600 mb-4">${{ price }}</p>
 
     <div class="flex gap-2" *ngIf="isAdmin">
-      <button
-        class="flex-1 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200"
-        (click)="onEdit()"
-      >
-        Editar
-      </button>
-      <button
-        class="flex-1 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200"
-        (click)="onDelete()"
-      >
-        Borrar
-      </button>
+      <app-button type="edit" (click)="onEdit()"></app-button>
+
+      <app-button type="delete" (click)="onDelete()"></app-button>
     </div>
   </div>
 </div>

@@ -1,0 +1,14 @@
+<button
+  class="flex items-center rounded-lg gap-1 transition-colors"
+  [ngClass]="padding"
+  [ngStyle]="{
+    'background-color': hover ? hoverColor(background) : background,
+    color: color,
+    'font-size': font
+  }"
+  (mouseenter)="hover = true"
+  (mouseleave)="hover = false"
+>
+  <span *ngIf="icon" [innerHTML]="icon"></span>
+  <span *ngIf="label">{{ label }}</span>
+</button>

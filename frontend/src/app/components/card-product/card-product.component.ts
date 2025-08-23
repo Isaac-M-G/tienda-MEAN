@@ -5,16 +5,19 @@ import { Router } from '@angular/router';
 import { GlobalVariables } from '../../shared/global-variables';
 import { AuthService } from '../../service/auth.service';
 import { CommonModule } from '@angular/common';
+import { ButtonComponent } from '../../mini-components/button/button.component';
+import { PopAlertService } from '../../service/pop-alert.service';
 @Component({
   selector: 'app-card-product',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ButtonComponent],
   templateUrl: './card-product.component.html',
   styleUrls: ['./card-product.component.css'],
 })
 export class CardProductComponent {
   isAdmin = false;
-
+  GlobalVariables = GlobalVariables;
+  
   @Input() id!: string;
   @Input() title: string = '';
   @Input() description: string = '';
@@ -26,17 +29,26 @@ export class CardProductComponent {
     private productService: ProductService,
     private firebaseService: FirebaseService,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private popAlertService: PopAlertService
   ) {
     const user = this.authService.getUserInfo();
     this.isAdmin = user?.role === 'admin';
   }
 
-  onDelete() {
+  async onDelete() {
     if (!this.id) {
       console.error('No se proporcionó id del producto');
       return;
     }
+
+    const confirmed = await this.popAlertService.confirm({
+      message: '¿Seguro que quieres borrar el producto?',
+      confirmText: 'Sí',
+      cancelText: 'No',
+    });
+
+    if (!confirmed) return;
 
     this.productService.deleteProduct(this.id).subscribe({
       next: async () => {
@@ -44,7 +56,6 @@ export class CardProductComponent {
         if (this.imageUrl) {
           await this.firebaseService.deleteImage(this.imageUrl);
         }
-
         this.hideCard();
       },
       error: (err) => {

@@ -12,11 +12,12 @@ import { AlertService } from '../../service/alert.service';
 import { GlobalVariables } from '../../shared/global-variables';
 import { Product } from '../../interfaces/product.interface';
 import { CommonModule } from '@angular/common';
+import { InputComponent } from '../../mini-components/input/input.component';
 
 @Component({
   selector: 'app-product-edit',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, InputComponent],
   templateUrl: './product-edit.component.html',
   styleUrls: ['./product-edit.component.css'],
 })
