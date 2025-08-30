@@ -1,11 +1,13 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { InputComponent } from '../input/input.component';
+import { ButtonComponent } from '../button/button.component';
 
 @Component({
   selector: 'app-filter-search',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, InputComponent, ButtonComponent],
   templateUrl: './filter-search.component.html',
   styleUrls: ['./filter-search.component.css'],
 })

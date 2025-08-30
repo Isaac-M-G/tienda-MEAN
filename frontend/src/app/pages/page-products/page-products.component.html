@@ -1,15 +1,15 @@
 <div class="max-w-7xl mx-auto px-4 py-8">
   <app-filter-search
     [items]="allProducts"
-    [fields]="['name', 'description', 'price']"
-    (filtered)="onProductsFiltered($event)"
+    [fields]="['name', 'description']"
+    (filtered)="onProductsFiltered($event, 'text')"
   ></app-filter-search>
 
   <app-filter-search
     [items]="allProducts"
     [fields]="['price']"
     [type]="'number'"
-    (filtered)="onProductsFiltered($event)"
+    (filtered)="onProductsFiltered($event, 'number')"
   ></app-filter-search>
 
   <app-filter-search
@@ -17,8 +17,9 @@
     [fields]="['category']"
     [type]="'select'"
     [options]="GlobalVariables.productCategories"
-    (filtered)="onProductsFiltered($event)"
+    (filtered)="onProductsFiltered($event, 'category')"
   ></app-filter-search>
+
   <!-- Título -->
   <h1
     class="text-4xl md:text-5xl font-extrabold text-red-600 text-center mb-10 drop-shadow-md"
@@ -39,7 +40,20 @@
       ></app-card-product>
     </div>
     <div *ngIf="filteredProducts.length === 0">
-      <p>No se encontraron productos.</p>
+      <p
+        *ngIf="
+          filterResults['category'] && filterResults['category'].length === 0
+        "
+      >
+        No hay productos que cumplan con los filtros seleccionados.
+      </p>
+      <p
+        *ngIf="
+          !filterResults['category'] || filterResults['category'].length > 0
+        "
+      >
+        No se encontraron productos.
+      </p>
     </div>
   </div>
 </div>

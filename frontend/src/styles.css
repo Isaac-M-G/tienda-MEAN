@@ -75,9 +75,9 @@
 
   --topbar-bg: var(--primary);
   --topbar-text: #ffffff;
-  --topbar-text-hover: var(--secondary);
+  --topbar-text-hover: var(--button-text);
   --topbar-button-bg: transparent;
-  --topbar-button-hover-bg: var(--secondary);
+  --topbar-button-hover-bg: var(--button);
   --topbar-button-text: #ffffff;
 
   --sidebar-bg: #f5f5f5;
@@ -111,9 +111,9 @@
 
   --topbar-bg: var(--primary);
   --topbar-text: #000000;
-  --topbar-text-hover: var(--secondary);
+  --topbar-text-hover: var(--button-text);
   --topbar-button-bg: transparent;
-  --topbar-button-hover-bg: var(--secondary);
+  --topbar-button-hover-bg: var(--button);
   --topbar-button-text: #000000;
 
   --sidebar-bg: #e0e0e0;
@@ -147,9 +147,9 @@
 
   --topbar-bg: #1a1a1a;
   --topbar-text: #ffffff;
-  --topbar-text-hover: var(--secondary);
+  --topbar-text-hover: var(--button-text);
   --topbar-button-bg: transparent;
-  --topbar-button-hover-bg: var(--secondary);
+  --topbar-button-hover-bg: var(--button);
   --topbar-button-text: #ffffff;
 
   --sidebar-bg: #1e1e1e;

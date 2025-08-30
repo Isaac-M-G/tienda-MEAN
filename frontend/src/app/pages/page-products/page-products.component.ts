@@ -24,6 +24,9 @@ export class PageProductsComponent implements OnInit {
   allProducts: Product[] = [];
   filteredProducts: Product[] = [];
 
+  // Guardar resultados parciales de cada filtro
+  filterResults: { [key: string]: Product[] } = {};
+
   constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
@@ -36,7 +39,21 @@ export class PageProductsComponent implements OnInit {
     });
   }
 
-  onProductsFiltered(filtered: Product[]) {
-    this.filteredProducts = filtered;
+  // Recibe el resultado de un filtro y su identificador
+  onProductsFiltered(filtered: Product[], filterId: string) {
+    this.filterResults[filterId] = filtered;
+
+    // Intersectar todos los filtros activos
+    let results = [...this.allProducts];
+    for (const key in this.filterResults) {
+      const f = this.filterResults[key];
+
+      // Aplicar AND para todos, incluso si el array está vacío
+      if (f) {
+        results = results.filter((p) => f.includes(p));
+      }
+    }
+
+    this.filteredProducts = results;
   }
 }

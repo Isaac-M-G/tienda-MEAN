@@ -1,45 +1,40 @@
 <!-- Texto -->
 <div class="mb-4" *ngIf="type === 'text'">
-  <input
+  <app-input
     type="text"
     [(ngModel)]="searchTerm"
     (input)="onSearchChange()"
     placeholder="Buscar..."
-    class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-  />
+  ></app-input>
 </div>
 
 <!-- Rango numérico -->
 <div class="mb-4 flex gap-2" *ngIf="type === 'number'">
-  <input
+  <app-input
     type="number"
     [(ngModel)]="minValue"
     (input)="onSearchChange()"
     placeholder="Mínimo"
-    class="w-1/2 border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-  />
-  <input
+  ></app-input>
+  <app-input
     type="number"
     [(ngModel)]="maxValue"
     (input)="onSearchChange()"
     placeholder="Máximo"
-    class="w-1/2 border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-  />
+  ></app-input>
 </div>
 
 <!-- Select múltiple -->
 <div class="mb-4" *ngIf="type === 'select'">
-  <label class="block mb-2 font-medium">Filtrar por categorías</label>
+  <label class="block mb-2 font-medium text-[var(--text)]">
+    Filtrar por categorías
+  </label>
   <div class="flex flex-wrap gap-2">
-    <button
+    <app-button
       *ngFor="let option of options"
-      type="button"
       (click)="toggleOption(option)"
-      [class.bg-blue-500]="selectedOptions.includes(option)"
-      [class.text-white]="selectedOptions.includes(option)"
-      class="px-3 py-1 rounded border hover:bg-blue-100 transition"
-    >
-      {{ option | titlecase }}
-    </button>
+      [label]="option | titlecase"
+      [isSelected]="selectedOptions.includes(option)"
+    ></app-button>
   </div>
 </div>

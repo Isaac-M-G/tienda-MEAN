@@ -57,6 +57,10 @@ export class ProductEditComponent implements OnInit {
   loadProduct(id: string) {
     this.productService.getProductById(id).subscribe({
       next: (product: Product) => {
+        if (!product) {
+          this.router.navigate([GlobalVariables.appRoutes.notFound]);
+          return;
+        }
         this.productForm.patchValue({
           name: product.name,
           description: product.description,

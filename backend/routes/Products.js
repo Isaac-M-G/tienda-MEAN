@@ -51,6 +51,19 @@ router.post("/", async (req, res) => {
   }
 });
 
+// Crear varios productos por postman para hacerlo rapido
+router.post("/bulk", async (req, res) => {
+  const products = req.body; // Espera un array de objetos { name, description, imageUrl, price, category }
+
+  try {
+    const savedProducts = await Product.insertMany(products);
+    res.status(201).json(savedProducts);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
+
 // Actualizar un producto
 router.put("/:id", async (req, res) => {
   try {

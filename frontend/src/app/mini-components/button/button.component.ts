@@ -19,12 +19,14 @@ export class ButtonComponent {
   @Input() fontSize?: string;
   @Input() iconSize?: string;
   @Input() bgBlack: boolean = false;
+  @Input() isSelected: boolean = false;
 
   hover = false;
 
   constructor(private sanitizer: DomSanitizer) {}
 
   get background(): string {
+    if (this.isSelected) return 'var(--primary)';
     if (this.bgColor) return this.bgColor;
 
     switch (this.type) {
@@ -42,7 +44,7 @@ export class ButtonComponent {
   }
 
   get color(): string {
-    if (this.bgBlack) {
+    if (this.bgBlack) {   // no estoy seguro ----------------------------
       return '#ffffff';
     }
     return this.textColor ?? 'var(--button-text)';

@@ -1,31 +1,57 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-input',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './input.component.html',
-  styleUrl: './input.component.css',
+  styleUrls: ['./input.component.css'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => InputComponent),
+      multi: true
+    }
+  ]
 })
-export class InputComponent {
+export class InputComponent implements ControlValueAccessor {
   @Input() label?: string;
   @Input() placeholder: string = '';
   @Input() type: 'text' | 'password' | 'email' | 'number' = 'text';
-  @Input() value?: string;
   @Input() padding: string = 'px-3 py-2';
-  @Input() borderColor: string = '#d1d5db'; // gris Tailwind por defecto
+  @Input() borderColor: string = 'var(--secondary)';
   @Input() rounded: string = 'rounded-md';
   @Input() fontSize: string = '14px';
-  @Input() textColor: string = '#111827'; // color texto gris oscuro
+  @Input() textColor: string = 'var(--text)';
+  @Input() bgColor: string = 'transparent';
 
-  @Output() valueChange = new EventEmitter<string>();
+  value?: string;
+
   @Output() inputEvent = new EventEmitter<Event>();
   @Output() enterPressed = new EventEmitter<void>();
 
+  // Callbacks para ngModel
+  onChange = (_: any) => {};
+  onTouched = () => {};
+
+  writeValue(value: any): void {
+    this.value = value;
+  }
+
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+
   onInput(event: Event) {
     const target = event.target as HTMLInputElement;
-    this.valueChange.emit(target.value);
+    this.value = target.value;
+    this.onChange(this.value); // <-- Propaga a ngModel
     this.inputEvent.emit(event);
   }
 

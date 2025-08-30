@@ -29,7 +29,6 @@ export class SingleProductComponent implements OnInit {
           if (res) {
             this.product = res;
           } else {
-            // 👇 Si no hay producto redirigimos al NotFound
             this.router.navigate([GlobalVariables.appRoutes.notFound]);
           }
         },
