@@ -17,7 +17,7 @@ import { PopAlertService } from '../../service/pop-alert.service';
 export class CardProductComponent {
   isAdmin = false;
   GlobalVariables = GlobalVariables;
-  
+
   @Input() id!: string;
   @Input() title: string = '';
   @Input() description: string = '';
@@ -71,6 +71,14 @@ export class CardProductComponent {
     }
     // Navegar a la ruta de edición
     this.router.navigate([GlobalVariables.appRoutes.products.edit(this.id)]);
+  }
+
+  goToDetail() {
+    if (!this.id) {
+      console.error('No se proporcionó id del producto');
+      return;
+    }
+    this.router.navigate([GlobalVariables.appRoutes.products.details(this.id)]);
   }
 
   hideCard() {

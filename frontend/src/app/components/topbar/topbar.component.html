@@ -1,28 +1,46 @@
 <!-- Topbar fijo y scrollable -->
 <nav
-  class="fixed top-0 left-0 right-0 h-16 bg-blue-600 text-white flex items-center px-4 shadow-md z-50 overflow-x-auto"
+  class="fixed top-0 left-0 right-0 h-16 bg-[var(--topbar-bg)] text-[var(--topbar-text)] flex items-center px-4 shadow-md z-50 overflow-x-auto"
 >
   <div class="flex items-center gap-4 flex-shrink-0">
     <!-- Botón hamburguesa -->
     <button
-      class="px-2 py-1 bg-blue-500 rounded hover:bg-blue-700 flex-shrink-0"
+      class="px-2 py-1 rounded bg-[var(--topbar-button-bg)] text-[var(--topbar-button-text)] hover:bg-[var(--topbar-button-hover-bg)] hover:text-[var(--topbar-text-hover)] flex-shrink-0 transition-colors duration-300"
       (click)="toggleSidebar.emit()"
     >
       ☰
     </button>
-    <h1 class="text-xl font-bold flex-shrink-0">Mi Proyecto</h1>
+    <p class="text-xl font-bold flex-shrink-0">Mi Proyecto</p>
   </div>
 
   <!-- Menú horizontal scrollable -->
-  <ul class="flex gap-4 ml-auto whitespace-nowrap">
+  <ul class="flex gap-4 ml-auto whitespace-nowrap items-center">
     <li *ngFor="let item of menuItems">
-      <a [routerLink]="item.link" class="hover:underline">
+      <a
+        [routerLink]="item.link"
+        class="hover:underline hover:text-[var(--topbar-text-hover)] transition-colors duration-300"
+      >
         {{ item.label }}
       </a>
     </li>
 
     <li *ngIf="isLoggedIn()">
-      <a (click)="logout()" class="hover:underline">Logout</a>
+      <a
+        (click)="logout()"
+        class="hover:underline hover:text-[var(--topbar-text-hover)] transition-colors duration-300"
+      >
+        Logout
+      </a>
+    </li>
+
+    <!-- Botón de cambio de tema -->
+    <li>
+      <button
+        (click)="nextTheme()"
+        class="ml-4 px-4 py-2 bg-[var(--button)] text-[var(--button-text,white)] rounded-lg transition-colors duration-300 hover:bg-[var(--button-edit)]"
+      >
+        Cambiar Tema ({{ currentTheme }})
+      </button>
     </li>
   </ul>
 </nav>

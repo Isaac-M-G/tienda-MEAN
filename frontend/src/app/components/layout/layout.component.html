@@ -1,28 +1,31 @@
 <!-- layout.component.html -->
 <app-top-alert></app-top-alert>
 <app-pop-alert></app-pop-alert>
-<!-- Contenedor general -->
+
 <div class="h-screen flex flex-col">
-  <!-- Topbar fijo y scrollable si hay mucho contenido -->
+  <!-- Topbar -->
   <div
     *ngIf="showTopbar"
-    class="fixed top-0 left-0 right-0 z-50 max-h-20 overflow-y-auto bg-blue-600"
+    class="fixed top-0 left-0 right-0 z-50 max-h-20 overflow-y-auto bg-[var(--layout-topbar-bg)]"
   >
     <app-topbar (toggleSidebar)="toggleSidebar()"></app-topbar>
   </div>
 
   <!-- Contenedor principal -->
   <div class="flex flex-1 pt-[64px]">
-    <!-- Leftbar fijo y scrollable -->
+    <!-- Leftbar -->
     <aside
-      class="w-64 bg-gray-100 border-r p-4 overflow-y-auto fixed top-[64px] bottom-0"
-      [class.hidden]="!showLeftbar"
+      class="w-64 bg-[var(--layout-leftbar-bg)] border-r border-[var(--layout-leftbar-border)] p-4 overflow-y-auto fixed top-[64px] bottom-0 transition-transform duration-300"
+      [class.-translate-x-64]="!showLeftbar"
     >
       <app-leftbar></app-leftbar>
     </aside>
 
     <!-- Main content -->
-    <main class="flex-1 ml-64 p-4 overflow-y-auto h-[calc(100vh-64px)]">
+    <main
+      class="flex-1 p-4 overflow-y-auto h-[calc(100vh-64px)] transition-all duration-300 bg-[var(--layout-main-bg)]"
+      [class.ml-64]="showLeftbar"
+    >
       <router-outlet></router-outlet>
     </main>
   </div>

@@ -1,12 +1,17 @@
 <aside
-  class="fixed top-16 left-0 w-64 h-[calc(100vh-4rem)] bg-gray-100 border-r p-4 overflow-y-auto"
+  class="fixed top-16 left-0 w-64 h-[calc(100vh-4rem)] bg-[var(--sidebar-bg)] border-[var(--sidebar-border)] p-4 overflow-y-auto"
 >
   <ul class="space-y-2">
     <li *ngFor="let item of menuItems">
       <a
         [routerLink]="item.link"
-        class="block hover:bg-gray-200 rounded p-2"
-        [ngClass]="{ 'font-bold': isActive(item.link) }"
+        class="block rounded p-2 text-[var(--sidebar-text)] transition-colors duration-300"
+        [ngClass]="{
+          'bg-[var(--sidebar-bg-active)] text-[var(--sidebar-text-active)] font-bold':
+            isActive(item.link),
+          'hover:bg-[var(--sidebar-bg-hover)] hover:text-[var(--sidebar-text-hover)]':
+            !isActive(item.link)
+        }"
       >
         {{ item.label }}
       </a>

@@ -9,6 +9,8 @@
   (mouseenter)="hover = true"
   (mouseleave)="hover = false"
 >
-  <span *ngIf="icon" [innerHTML]="icon"></span>
-  <span *ngIf="label">{{ label }}</span>
+  <span class="inline-flex items-center gap-2">
+    <span *ngIf="icon" [innerHTML]="icon"></span>
+    <span *ngIf="label">{{ label }}</span>
+  </span>
 </button>

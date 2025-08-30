@@ -50,6 +50,20 @@ export class LeftbarComponent implements OnInit {
     // En cualquier otra ruta → mostrar este menú
     this.menuItems = [
       { label: 'Productos', link: this.routes.products.default },
+
+      // { label: 'Productos', link: this.routes.products.default },
+      // { label: 'Productos', link: this.routes.products.default },
+      // { label: 'Productos', link: this.routes.products.default },
+      // { label: 'Productos', link: this.routes.products.default },
+      // { label: 'Productos', link: this.routes.products.default },
+      // { label: 'Productos', link: this.routes.products.default },
+      // { label: 'Productos', link: this.routes.products.default },
+      // { label: 'Productos', link: this.routes.products.default },
+      // { label: 'Productos', link: this.routes.products.default },
+      // { label: 'Productos', link: this.routes.products.default },
+      // { label: 'Productos', link: this.routes.products.default },
+      // { label: 'Productos', link: this.routes.products.default },
+
       {
         label: 'Crear Producto',
         link: this.routes.products.create,

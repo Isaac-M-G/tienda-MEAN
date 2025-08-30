@@ -2,3 +2,166 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* styles.css */
+
+/* (Opcional) más temas a futuro */
+.opcion1 {
+  --primary: #e63946; /* rojo vivo */
+  --secondary: #f5f5f5; /* blanco grisáceo */
+  --tertiary: #9a8c98; /* lila suave */
+  --accent: #22223b; /* azul muy oscuro / casi negro */
+  --neutral: #4a4e69; /* gris oscuro */
+  --cream: #fff4e1; /* crema suave */
+}
+
+:root {
+  /* 🎨 Colores base */
+  --primary: #2a9d8f;
+  --secondary: #f4a261;
+  --tertiary: #e9c46a;
+
+  /* 🔘 Botones */
+  --button: #264653;
+  --button-edit: #2196f3;
+  --button-delete: #e63946;
+  --button-text: #ffffff; /* texto general de botones */
+
+  /* 📝 Texto */
+  --title: #1d3557;
+  --text: #333333;
+
+  /* 🌍 Fondos */
+  --background: #ffffff;
+
+  /* 🔝 Topbar */
+  --topbar-bg: var(--primary);
+  --topbar-text: #ffffff;
+  --topbar-text-hover: var(--secondary);
+  --topbar-button-bg: transparent;
+  --topbar-button-hover-bg: var(--secondary);
+  --topbar-button-text: #ffffff;
+
+  /* 📂 Sidebar */
+  --sidebar-bg: var(--secondary);
+  --sidebar-border: var(--primary);
+  --sidebar-text: #333333;
+  --sidebar-text-active: #ffffff;
+  --sidebar-bg-active: var(--primary);
+  --sidebar-text-hover: #ffffff;
+  --sidebar-bg-hover: var(--tertiary);
+
+  /* 📐 Layout */
+  --layout-topbar-bg: var(--primary);
+  --layout-leftbar-bg: #f9f9f9;
+  --layout-leftbar-border: var(--secondary);
+  --layout-main-bg: var(--background);
+}
+
+/* 🌞 Tema 1: Claro */
+.theme-light {
+  --primary: #2a9d8f;
+  --secondary: #f4a261;
+  --tertiary: #e9c46a;
+
+  --button: #f8be00;
+  --button-edit: #6ff303;
+  --button-delete: #e63946;
+  --button-text: #ffffff;
+
+  --background: #ffffff;
+  --title: #1d3557;
+  --text: #333333;
+
+  --topbar-bg: var(--primary);
+  --topbar-text: #ffffff;
+  --topbar-text-hover: var(--secondary);
+  --topbar-button-bg: transparent;
+  --topbar-button-hover-bg: var(--secondary);
+  --topbar-button-text: #ffffff;
+
+  --sidebar-bg: #f5f5f5;
+  --sidebar-border: var(--secondary);
+  --sidebar-text: #333333;
+  --sidebar-text-active: #ffffff;
+  --sidebar-bg-active: var(--primary);
+  --sidebar-text-hover: #ffffff;
+  --sidebar-bg-hover: var(--tertiary);
+
+  --layout-topbar-bg: var(--primary);
+  --layout-leftbar-bg: #f9f9f9;
+  --layout-leftbar-border: var(--secondary);
+  --layout-main-bg: var(--background);
+}
+
+/* 🌫️ Tema 2: Gris */
+.theme-gray {
+  --primary: #8ecae6;
+  --secondary: #ffb703;
+  --tertiary: #fb8500;
+
+  --button: #023047;
+  --button-edit: #2196f3;
+  --button-delete: #e63946;
+  --button-text: #ffffff;
+
+  --background: #f5f5f5;
+  --title: #000000;
+  --text: #444444;
+
+  --topbar-bg: var(--primary);
+  --topbar-text: #000000;
+  --topbar-text-hover: var(--secondary);
+  --topbar-button-bg: transparent;
+  --topbar-button-hover-bg: var(--secondary);
+  --topbar-button-text: #000000;
+
+  --sidebar-bg: #e0e0e0;
+  --sidebar-border: var(--primary);
+  --sidebar-text: #222222;
+  --sidebar-text-active: #ffffff;
+  --sidebar-bg-active: var(--primary);
+  --sidebar-text-hover: #ffffff;
+  --sidebar-bg-hover: var(--tertiary);
+
+  --layout-topbar-bg: var(--primary);
+  --layout-leftbar-bg: #eaeaea;
+  --layout-leftbar-border: var(--secondary);
+  --layout-main-bg: var(--background);
+}
+
+/* 🌑 Tema 3: Oscuro */
+.theme-dark {
+  --primary: #90e0ef;
+  --secondary: #48cae4;
+  --tertiary: #0077b6;
+
+  --button: #03045e;
+  --button-edit: #4361ee;
+  --button-delete: #e63946;
+  --button-text: #ffffff;
+
+  --background: #121212;
+  --title: #ffffff;
+  --text: #dddddd;
+
+  --topbar-bg: #1a1a1a;
+  --topbar-text: #ffffff;
+  --topbar-text-hover: var(--secondary);
+  --topbar-button-bg: transparent;
+  --topbar-button-hover-bg: var(--secondary);
+  --topbar-button-text: #ffffff;
+
+  --sidebar-bg: #1e1e1e;
+  --sidebar-border: var(--primary);
+  --sidebar-text: #cccccc;
+  --sidebar-text-active: #ffffff;
+  --sidebar-bg-active: var(--primary);
+  --sidebar-text-hover: #ffffff;
+  --sidebar-bg-hover: var(--tertiary);
+
+  --layout-topbar-bg: #1a1a1a;
+  --layout-leftbar-bg: #1e1e1e;
+  --layout-leftbar-border: var(--secondary);
+  --layout-main-bg: var(--background);
+}

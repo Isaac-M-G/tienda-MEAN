@@ -10,7 +10,7 @@ import { GlobalVariables } from '../../shared/global-variables';
   templateUrl: './button.component.html',
 })
 export class ButtonComponent {
-  @Input() type: 'delete' | 'create' | 'edit' | undefined;
+  @Input() type: 'delete' | 'create' | 'edit' | 'goBack' | undefined;
   @Input() label?: string;
   @Input() bgColor?: string;
   @Input() textColor?: string;
@@ -18,6 +18,7 @@ export class ButtonComponent {
   @Input() customSvg?: string;
   @Input() fontSize?: string;
   @Input() iconSize?: string;
+  @Input() bgBlack: boolean = false;
 
   hover = false;
 
@@ -25,20 +26,26 @@ export class ButtonComponent {
 
   get background(): string {
     if (this.bgColor) return this.bgColor;
+
     switch (this.type) {
       case 'delete':
-        return '#ef4444';
+        return 'var(--button-delete)';
       case 'create':
-        return '#22c55e';
+        return 'var(--button)';
       case 'edit':
-        return '#3b82f6';
+        return 'var(--button-edit)';
+      case 'goBack':
+        return 'var(--button-edit)';
       default:
-        return '#e5e7eb';
+        return 'var(--button)';
     }
   }
 
   get color(): string {
-    return this.textColor ?? '#ffffff';
+    if (this.bgBlack) {
+      return '#ffffff';
+    }
+    return this.textColor ?? 'var(--button-text)';
   }
 
   get font(): string {
@@ -62,10 +69,30 @@ export class ButtonComponent {
     return this.sanitizer.bypassSecurityTrustHtml(styledSvg);
   }
 
-  hoverColor(hex: string, alpha = 0.8): string {
+  hoverColor(color: string, alpha = 0.8): string {
+    if (this.bgBlack) {
+      return 'rgba(0, 0, 0, 0.8)';
+    }
+    // Si es una variable CSS, la resolvemos en tiempo de ejecución
+    if (color.startsWith('var(')) {
+      const cssVar = color.match(/var\((--[^)]+)\)/)?.[1];
+      if (cssVar) {
+        const resolved = getComputedStyle(document.documentElement)
+          .getPropertyValue(cssVar)
+          .trim();
+        return this.hexToRgba(resolved, alpha);
+      }
+    }
+
+    // Si es un hex (#rrggbb o #rgb)
+    return this.hexToRgba(color, alpha);
+  }
+
+  private hexToRgba(hex: string, alpha: number): string {
     let r = 0,
       g = 0,
       b = 0;
+
     if (hex.startsWith('#')) {
       const h = hex.substring(1);
       if (h.length === 3) {
@@ -78,6 +105,7 @@ export class ButtonComponent {
         b = parseInt(h.substring(4, 6), 16);
       }
     }
+
     return `rgba(${r}, ${g}, ${b}, ${alpha})`;
   }
 }
