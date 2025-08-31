@@ -2,8 +2,10 @@
   class="flex items-center rounded-lg gap-1 transition-colors"
   [ngClass]="padding"
   [ngStyle]="{
-    'background-color': hover ? hoverColor(background) : background,
-    color: color,
+    'background-color': hover
+      ? hoverBgColor ?? hoverColor(background)
+      : background,
+    color: hover ? hoverTextColor ?? color : color,
     'font-size': font
   }"
   (mouseenter)="hover = true"

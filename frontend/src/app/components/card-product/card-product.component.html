@@ -14,9 +14,9 @@
   <!-- Contenido -->
   <div class="p-6 flex flex-col flex-grow">
     <!-- Título -->
-    <h5 class="text-2xl font-bold tracking-wide text-gray-900 mb-2">
+    <span class="text-2xl font-bold tracking-wide text-gray-900 mb-2">
       {{ title }}
-    </h5>
+    </span>
 
     <!-- Descripción -->
     <p class="text-gray-600 mb-2 line-clamp-3">
@@ -36,8 +36,13 @@
     <!-- Acciones -->
     <div class="mt-auto flex items-center justify-between">
       <!-- Botón ver más -->
-      <app-button (click)="goToDetail()" label="Ver más"
-      [bgBlack]="true"> </app-button>
+      <app-button
+        (click)="goToDetail()"
+        label="Ver más"
+        hoverBgColor="black"
+        hoverTextColor="white"
+      >
+      </app-button>
 
       <!-- Botones admin -->
       <div class="flex gap-2" *ngIf="isAdmin">

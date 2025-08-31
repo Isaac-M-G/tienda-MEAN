@@ -5,6 +5,8 @@
     [(ngModel)]="searchTerm"
     (input)="onSearchChange()"
     placeholder="Buscar..."
+    [customSvg]="globalVariables.icons.search"
+    iconColor="var(--primary)"
   ></app-input>
 </div>
 
@@ -26,9 +28,6 @@
 
 <!-- Select múltiple -->
 <div class="mb-4" *ngIf="type === 'select'">
-  <label class="block mb-2 font-medium text-[var(--text)]">
-    Filtrar por categorías
-  </label>
   <div class="flex flex-wrap gap-2">
     <app-button
       *ngFor="let option of options"

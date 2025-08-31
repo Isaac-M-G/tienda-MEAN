@@ -12,13 +12,18 @@ import { GlobalVariables } from '../../shared/global-variables';
 export class ButtonComponent {
   @Input() type: 'delete' | 'create' | 'edit' | 'goBack' | undefined;
   @Input() label?: string;
+
   @Input() bgColor?: string;
   @Input() textColor?: string;
+
+  // nuevos inputs para hover
+  @Input() hoverBgColor?: string;
+  @Input() hoverTextColor?: string;
+
   @Input() padding: string = 'px-4 py-2';
   @Input() customSvg?: string;
   @Input() fontSize?: string;
   @Input() iconSize?: string;
-  @Input() bgBlack: boolean = false;
   @Input() isSelected: boolean = false;
 
   hover = false;
@@ -26,9 +31,11 @@ export class ButtonComponent {
   constructor(private sanitizer: DomSanitizer) {}
 
   get background(): string {
-    if (this.isSelected) return 'var(--primary)';
-    if (this.bgColor) return this.bgColor;
+    if (this.isSelected) return 'var(--secondary)';
+    return this.bgColor ?? this.defaultBackground;
+  }
 
+  private get defaultBackground(): string {
     switch (this.type) {
       case 'delete':
         return 'var(--button-delete)';
@@ -44,9 +51,7 @@ export class ButtonComponent {
   }
 
   get color(): string {
-    if (this.bgBlack) {   // no estoy seguro ----------------------------
-      return '#ffffff';
-    }
+    if (this.isSelected) return 'var(--text-on-bg-secondary)';
     return this.textColor ?? 'var(--button-text)';
   }
 
@@ -60,9 +65,9 @@ export class ButtonComponent {
     if (!raw) return null;
 
     const size = this.iconSize ?? this.fontSize ?? '20px';
-    const color = this.color; // toma el textColor
+    const color =
+      this.hover && this.hoverTextColor ? this.hoverTextColor : this.color;
 
-    // agrega width, height y fill
     const styledSvg = raw.replace(
       /<svg /,
       `<svg width="${size}" height="${size}" fill="${color}" `
@@ -72,10 +77,6 @@ export class ButtonComponent {
   }
 
   hoverColor(color: string, alpha = 0.8): string {
-    if (this.bgBlack) {
-      return 'rgba(0, 0, 0, 0.8)';
-    }
-    // Si es una variable CSS, la resolvemos en tiempo de ejecución
     if (color.startsWith('var(')) {
       const cssVar = color.match(/var\((--[^)]+)\)/)?.[1];
       if (cssVar) {
@@ -85,8 +86,6 @@ export class ButtonComponent {
         return this.hexToRgba(resolved, alpha);
       }
     }
-
-    // Si es un hex (#rrggbb o #rgb)
     return this.hexToRgba(color, alpha);
   }
 

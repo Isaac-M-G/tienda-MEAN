@@ -50,25 +50,23 @@ export class LeftbarComponent implements OnInit {
     // En cualquier otra ruta → mostrar este menú
     this.menuItems = [
       { label: 'Productos', link: this.routes.products.default },
-
-      // { label: 'Productos', link: this.routes.products.default },
-      // { label: 'Productos', link: this.routes.products.default },
-      // { label: 'Productos', link: this.routes.products.default },
-      // { label: 'Productos', link: this.routes.products.default },
-      // { label: 'Productos', link: this.routes.products.default },
-      // { label: 'Productos', link: this.routes.products.default },
-      // { label: 'Productos', link: this.routes.products.default },
-      // { label: 'Productos', link: this.routes.products.default },
-      // { label: 'Productos', link: this.routes.products.default },
-      // { label: 'Productos', link: this.routes.products.default },
-      // { label: 'Productos', link: this.routes.products.default },
-      // { label: 'Productos', link: this.routes.products.default },
-
       {
         label: 'Crear Producto',
         link: this.routes.products.create,
         adminOnly: true,
       },
+
+      // { label: 'Crear Producto', link: this.routes.products.create },
+      // { label: 'Crear Producto', link: this.routes.products.create },
+      // { label: 'Crear Producto', link: this.routes.products.create },
+      // { label: 'Crear Producto', link: this.routes.products.create },
+      // { label: 'Crear Producto', link: this.routes.products.create },
+      // { label: 'Crear Producto', link: this.routes.products.create },
+      // { label: 'Crear Producto', link: this.routes.products.create },
+      // { label: 'Crear Producto', link: this.routes.products.create },
+      // { label: 'Crear Producto', link: this.routes.products.create },
+      // { label: 'Crear Producto', link: this.routes.products.create },
+      // { label: 'Crear Producto', link: this.routes.products.create },
     ];
 
     // Filtrar adminOnly si fuera necesario
@@ -78,6 +76,9 @@ export class LeftbarComponent implements OnInit {
   }
 
   isActive(link: string): boolean {
+    if (!link) {
+      return this.currentUrl === '/' || this.currentUrl === '';
+    }
     return this.currentUrl.startsWith('/' + link);
   }
 }

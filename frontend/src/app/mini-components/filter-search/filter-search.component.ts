@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { InputComponent } from '../input/input.component';
 import { ButtonComponent } from '../button/button.component';
+import { GlobalVariables } from '../../shared/global-variables';
 
 @Component({
   selector: 'app-filter-search',
@@ -27,6 +28,8 @@ export class FilterSearchComponent<T = any> {
 
   // select
   selectedOptions: string[] = [];
+
+  globalVariables = GlobalVariables;
 
   onSearchChange() {
     let results = this.items;

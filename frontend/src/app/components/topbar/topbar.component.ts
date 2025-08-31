@@ -24,7 +24,7 @@ export class TopbarComponent {
 
   /** Rutas globales para usar en el template */
   routes = GlobalVariables.appRoutes;
-  themes = ['theme-light', 'theme-gray', 'theme-dark'];
+  themes = ['dePrueba', 'inBlue', 'inWhite', 'inGreen', 'inRed']; // coinciden con el styles css
   currentTheme = this.themes[0];
 
   // Array de links del menú
@@ -62,6 +62,10 @@ export class TopbarComponent {
     private popAlertService: PopAlertService,
     private renderer: Renderer2
   ) {
+    // leer del localStorage si existe, si no usar el primero
+    const savedTheme = localStorage.getItem('theme');
+    this.currentTheme = savedTheme ? savedTheme : this.themes[0];
+
     this.applyTheme(this.currentTheme);
   }
 
@@ -90,6 +94,10 @@ export class TopbarComponent {
     let index = this.themes.indexOf(this.currentTheme);
     index = (index + 1) % this.themes.length;
     this.currentTheme = this.themes[index];
+
+    // guardar en localStorage
+    localStorage.setItem('theme', this.currentTheme);
+
     this.applyTheme(this.currentTheme);
   }
 

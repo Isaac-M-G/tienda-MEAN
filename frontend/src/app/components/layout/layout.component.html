@@ -4,22 +4,19 @@
 
 <div class="h-screen flex flex-col">
   <!-- Topbar -->
-  <div
-    *ngIf="showTopbar"
-    class="fixed top-0 left-0 right-0 z-50 max-h-20 overflow-y-auto bg-[var(--layout-topbar-bg)]"
-  >
+  <div *ngIf="showTopbar">
     <app-topbar (toggleSidebar)="toggleSidebar()"></app-topbar>
   </div>
 
   <!-- Contenedor principal -->
   <div class="flex flex-1 pt-[64px]">
     <!-- Leftbar -->
-    <aside
-      class="w-64 bg-[var(--layout-leftbar-bg)] border-r border-[var(--layout-leftbar-border)] p-4 overflow-y-auto fixed top-[64px] bottom-0 transition-transform duration-300"
+    <div
       [class.-translate-x-64]="!showLeftbar"
+      class="transition-transform duration-3000"
     >
       <app-leftbar></app-leftbar>
-    </aside>
+    </div>
 
     <!-- Main content -->
     <main
