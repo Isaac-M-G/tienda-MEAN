@@ -31,20 +31,42 @@
     <li *ngIf="isLoggedIn()">
       <a
         (click)="logout()"
-        class="hover:underline hover:text-[var(--topbar-text-hover)] transition-colors duration-300"
+        class="hover:underline hover:text-[var(--topbar-text-hover)] transition-colors duration-300 cursor-pointer"
       >
         Logout
       </a>
     </li>
 
-    <!-- Botón de cambio de tema -->
-    <li>
-      <button
-        (click)="nextTheme()"
-        class="ml-4 px-4 py-2 bg-[var(--button)] text-[var(--button-text,white)] rounded-lg transition-colors duration-300 hover:bg-[var(--button-edit)]"
+    <!-- Botón de configuración con dropdown -->
+    <li class="relative">
+      <app-button
+        (click)="toggleSettingsDropdown()"
+        [customSvg]="globalVariables.icons.settings"
+        iconSize="24"
+        bgColor="transparent"
+        hoverBgColor="var(--secondary)"
+        hoverTextColor="var(--text-on-bg-secondary)"
+        padding="p-2"
+      ></app-button>
+
+      <!-- Dropdown de opciones  -->
+      <ul
+        *ngIf="settingsDropdownOpen"
+        class="fixed top-[70px] right-4 w-48 bg-[var(--topbar-bg)] text-[var(--topbar-text)] rounded-lg shadow-xl overflow-hidden border-[4px] border-[var(--topbar-bg)]"
       >
-        Cambiar Tema ({{ currentTheme }})
-      </button>
+        <li
+          class="px-4 py-2 hover:bg-[var(--topbar-text)] hover:text-[var(--topbar-bg)] cursor-pointer transition-colors"
+          (click)="nextTheme(); settingsDropdownOpen = false"
+        >
+          Cambiar Tema ({{ currentTheme }})
+        </li>
+        <li
+          class="px-4 py-2 hover:bg-[var(--topbar-text)] hover:text-[var(--topbar-bg)] cursor-pointer transition-colors"
+          (click)="goToProfile(); settingsDropdownOpen = false"
+        >
+          Ver Perfil
+        </li>
+      </ul>
     </li>
   </ul>
 </nav>

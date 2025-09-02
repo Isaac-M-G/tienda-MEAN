@@ -1,0 +1,58 @@
+<div class="flex flex-col gap-1 relative">
+  <label *ngIf="label" class="text-[var(--text-on-bg-layout)] font-medium">
+    {{ label }}
+  </label>
+
+  <div
+    class="relative cursor-pointer transition-colors"
+    [ngStyle]="{
+      'background-color': hover ? hoverBgColor ?? bgColor : bgColor,
+      color: hover ? hoverTextColor ?? textColor : textColor,
+      border: '1px solid ' + borderColor
+    }"
+    [ngClass]="rounded + ' ' + padding"
+    (click)="hover = !hover"
+  >
+    <!-- Ícono opcional -->
+    <span
+      *ngIf="icon"
+      class="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"
+      [innerHTML]="icon"
+    ></span>
+
+    <!-- Texto seleccionado -->
+    <span
+      class="block truncate"
+      [ngStyle]="{ 'padding-left': icon ? '2rem' : '0' }"
+    >
+      {{ selectedLabel }}
+    </span>
+
+    <!-- Flecha -->
+    <span
+      class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none transition-transform"
+      [ngClass]="{ 'rotate-180': hover }"
+    >
+      ▼
+    </span>
+  </div>
+
+  <!-- Dropdown -->
+  <ul
+    *ngIf="hover"
+    class="absolute top-full left-0 mt-1 w-full bg-[var(--layout-bg)] text-[var(--text-on-bg-layout)] border border-[var(--border-color)] rounded-md shadow-lg z-50 max-h-60 overflow-y-auto"
+  >
+    <li
+      *ngFor="let option of options"
+      class="px-3 py-2 hover:bg-[var(--text-on-bg-layout)] hover:text-[var(--layout-bg)] flex items-center gap-2 cursor-pointer transition-colors"
+      (click)="selectOption(option); hover = false"
+    >
+      <span
+        *ngIf="option.icon"
+        [innerHTML]="option.icon"
+        class="pointer-events-none"
+      ></span>
+      <span>{{ option.label }}</span>
+    </li>
+  </ul>
+</div>

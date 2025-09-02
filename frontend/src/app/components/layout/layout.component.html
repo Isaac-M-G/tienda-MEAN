@@ -5,23 +5,25 @@
 <div class="h-screen flex flex-col">
   <!-- Topbar -->
   <div *ngIf="showTopbar">
-    <app-topbar (toggleSidebar)="toggleSidebar()"></app-topbar>
+    <app-topbar (toggleSidebar)="toggleSidebar()" ></app-topbar>
   </div>
 
   <!-- Contenedor principal -->
   <div class="flex flex-1 pt-[64px]">
     <!-- Leftbar -->
-    <div
-      [class.-translate-x-64]="!showLeftbar"
-      class="transition-transform duration-3000"
+    <aside
+      *ngIf="showLeftbar; else leftbarClosed"
+      class="w-64 bg-[var(--sidebar-bg)]"
     >
       <app-leftbar></app-leftbar>
-    </div>
+    </aside>
+    <ng-template #leftbarClosed>
+      <div class="w-0"></div>
+    </ng-template>
 
     <!-- Main content -->
     <main
-      class="flex-1 p-4 overflow-y-auto h-[calc(100vh-64px)] transition-all duration-300 bg-[var(--layout-bg)]"
-      [class.ml-64]="showLeftbar"
+      class="flex-1 p-4 overflow-y-auto h-[calc(100vh-64px)] bg-[var(--layout-bg)] transition-all duration-300"
     >
       <router-outlet></router-outlet>
     </main>

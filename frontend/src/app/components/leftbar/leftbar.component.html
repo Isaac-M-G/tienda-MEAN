@@ -5,11 +5,11 @@
     <li *ngFor="let item of menuItems">
       <a
         [routerLink]="item.link"
-        class="block rounded p-2 text-[var(--sidebar-text)] transition-colors duration-300"
+        class="block rounded-lg px-4 py-3 transition-all duration-300 border-l-4 border-transparent shadow-xl"
         [ngClass]="{
-          'bg-[var(--sidebar-bg-active)] text-[var(--sidebar-text-active)] font-bold':
+          'bg-[var(--sidebar-bg-active)] text-[var(--sidebar-text-active)] font-bold border-l-[var(--primary)] shadow-md':
             isActive(item.link),
-          'hover:bg-[var(--sidebar-bg-hover)] hover:text-[var(--sidebar-text-hover)]':
+          'bg-[var(--sidebar-bg)] text-[var(--sidebar-text)] hover:bg-[var(--sidebar-bg-hover)] hover:text-[var(--sidebar-text-hover)] hover:pl-5 cursor-pointer':
             !isActive(item.link)
         }"
       >

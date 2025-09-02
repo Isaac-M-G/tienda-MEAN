@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { InputComponent } from '../input/input.component';
-import { ButtonComponent } from '../button/button.component';
+import { InputComponent } from '../../mini-components/input/input.component';
+import { ButtonComponent } from '../../mini-components/button/button.component';
 import { GlobalVariables } from '../../shared/global-variables';
 
 @Component({

@@ -4,8 +4,10 @@ import { Product } from '../../interfaces/product.interface';
 import { ProductFormComponent } from '../../components/product-form/product-form.component';
 import { CardProductComponent } from '../../components/card-product/card-product.component';
 import { CommonModule } from '@angular/common';
-import { FilterSearchComponent } from '../../mini-components/filter-search/filter-search.component';
+import { FilterSearchComponent } from '../../components/filter-search/filter-search.component';
 import { GlobalVariables } from '../../shared/global-variables';
+import { SelectComponent } from '../../mini-components/select/select.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-page-products',
@@ -15,12 +17,20 @@ import { GlobalVariables } from '../../shared/global-variables';
     CardProductComponent,
     CommonModule,
     FilterSearchComponent,
+    SelectComponent,
+    FormsModule,
   ],
   templateUrl: './page-products.component.html',
   styleUrls: ['./page-products.component.css'],
 })
 export class PageProductsComponent implements OnInit {
-  GlobalVariables = GlobalVariables;
+  selectedValue: string = '';
+  options = [
+    { label: 'Opción 1', value: '1' },
+    { label: 'Opción 2', value: '2' },
+  ];
+
+  globalVariables = GlobalVariables;
   allProducts: Product[] = [];
   filteredProducts: Product[] = [];
 

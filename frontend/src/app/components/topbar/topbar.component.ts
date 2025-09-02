@@ -30,6 +30,9 @@ export class TopbarComponent {
 
   globalVariables = GlobalVariables;
 
+  // Estado del dropdown
+  settingsDropdownOpen = false;
+
   // Array de links del menú
   get menuItems() {
     const items = [
@@ -111,5 +114,14 @@ export class TopbarComponent {
     );
     // Agrega el nuevo tema
     this.renderer.addClass(document.documentElement, theme);
+  }
+
+  // Alterna el dropdown
+  toggleSettingsDropdown() {
+    this.settingsDropdownOpen = !this.settingsDropdownOpen;
+  }
+
+  goToProfile() {
+    this.router.navigate([this.routes.home]);
   }
 }
