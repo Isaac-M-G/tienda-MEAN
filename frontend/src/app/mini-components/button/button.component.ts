@@ -19,8 +19,8 @@ export class ButtonComponent {
   // nuevos inputs para hover
   @Input() hoverBgColor?: string;
   @Input() hoverTextColor?: string;
-
   @Input() padding: string = 'px-4 py-2';
+
   @Input() customSvg?: string;
   @Input() fontSize?: string;
   @Input() iconSize?: string;

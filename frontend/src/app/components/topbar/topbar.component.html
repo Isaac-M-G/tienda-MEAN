@@ -4,12 +4,16 @@
 >
   <div class="flex items-center gap-4 flex-shrink-0">
     <!-- Botón hamburguesa -->
-    <button
-      class="px-2 py-1 rounded bg-[var(--topbar-button-bg)] text-[var(--topbar-button-text)] hover:bg-[var(--topbar-button-hover-bg)] hover:text-[var(--topbar-text-hover)] flex-shrink-0 transition-colors duration-300"
+    <app-button
       (click)="toggleSidebar.emit()"
+      [customSvg]="globalVariables.icons.hamburguer"
+      hoverBgColor="var(--secondary)"
+      hoverTextColor="var(--text-on-bg-secondary)"
+      bgColor="transparent"
+      padding="p-2"
     >
-      ☰
-    </button>
+    </app-button>
+
     <p class="text-xl font-bold flex-shrink-0">Mi Proyecto</p>
   </div>
 

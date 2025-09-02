@@ -12,7 +12,7 @@
   (mouseleave)="hover = false"
 >
   <span class="inline-flex items-center gap-2">
-    <span *ngIf="icon" [innerHTML]="icon"></span>
+    <span *ngIf="icon" [innerHTML]="icon" class="pointer-events-none"></span>
     <span *ngIf="label">{{ label }}</span>
   </span>
 </button>

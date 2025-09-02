@@ -28,10 +28,10 @@ export class InputComponent implements ControlValueAccessor {
   @Input() placeholder: string = '';
   @Input() type: 'text' | 'password' | 'email' | 'number' = 'text';
   @Input() padding: string = 'px-3 py-2';
-  @Input() borderColor: string = 'var(--primary)';
+  @Input() borderColor: string = 'var(--border-color)';
   @Input() rounded: string = 'rounded-md';
   @Input() fontSize: string = '14px';
-  @Input() textColor: string = 'var(--text)';
+  @Input() textColor: string = 'var(--text-on-bg-layout)';
   @Input() bgColor: string = 'transparent';
 
   // 👇 Nuevo input para SVG

@@ -74,6 +74,41 @@
   --sidebar-bg-hover: #60a5fa;
 }
 
+.inDark {
+  --primary: #0f172a; /* azul gris muy oscuro */
+  --secondary: #1e293b; /* gris azulado oscuro */
+  --tertiary: #334155; /* gris intermedio */
+
+  --text-on-bg-primary: #ffffff;
+  --text-on-bg-secondary: #f1f5f9;
+  --text-on-bg-tertiary: #e2e8f0;
+
+  --layout-bg: #0f172a; /* fondo general oscuro */
+  --background-secondary: #1e293b; /* fondo de tarjetas/paneles */
+
+  --text-on-bg-layout: #f8fafc;
+  --title-on-bg-layout: #f8fafc;
+  --title-on-bg-secondary: #e2e8f0;
+
+  --button: #2563eb; /* azul brillante para destacar */
+  --button-edit: #3b82f6;
+  --button-delete: #ef4444;
+  --button-text: #ffffff;
+
+  --border-color: #1369e2;
+
+  --topbar-bg: #1e293b;
+  --topbar-text: #f8fafc;
+  --topbar-text-hover: #60a5fa;
+
+  --sidebar-bg: #1e293b;
+  --sidebar-text: #cbd5e1;
+  --sidebar-text-active: #ffffff;
+  --sidebar-bg-active: #2563eb;
+  --sidebar-text-hover: #ffffff;
+  --sidebar-bg-hover: #334155;
+}
+
 .inWhite {
   --primary: #e5e5e5; /* gris muy claro */
   --secondary: #f9fafb; /* casi blanco */

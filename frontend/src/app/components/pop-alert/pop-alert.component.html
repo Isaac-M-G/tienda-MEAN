@@ -4,20 +4,32 @@
   (click)="cancel(alert)"
 >
   <div
-    class="bg-white p-6 rounded shadow-lg w-80"
+    class="bg-[var(--layout-bg)] rounded-xl shadow-2xl min-h-[200px] min-w-[250px] w-96 flex flex-col justify-between p-8"
     (click)="$event.stopPropagation()"
   >
-    <p class="mb-4">{{ alert.message }}</p>
-    <div class="flex justify-end gap-2">
-      <button class="px-4 py-2 bg-gray-300 rounded" (click)="cancel(alert)">
-        {{ alert.cancelText || "Cancelar" }}
-      </button>
-      <button
-        class="px-4 py-2 bg-blue-500 text-white rounded"
+    <!-- Mensaje centrado -->
+    <div
+      class="flex flex-col flex-grow justify-center items-center text-center"
+    >
+      <p class="text-[var(--title-on-bg-layout)] text-lg">
+        {{ alert.message }}
+      </p>
+    </div>
+
+    <!-- Botones abajo -->
+    <div class="flex justify-end gap-3 mt-6">
+      <app-button
+        (click)="cancel(alert)"
+        bgColor="#e72828"
+        textColor="white"
+        [label]="alert.cancelText || 'Cancelar'"
+        fontSize="text-sm"
+      ></app-button>
+      <app-button
         (click)="confirm(alert)"
-      >
-        {{ alert.confirmText || "Confirmar" }}
-      </button>
+        [label]="alert.confirmText || 'Confirmar'"
+        fontSize="text-sm"
+      ></app-button>
     </div>
   </div>
 </div>

@@ -11,11 +11,12 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { PopAlertComponent } from '../pop-alert/pop-alert.component';
 import { PopAlertService } from '../../service/pop-alert.service';
+import { ButtonComponent } from '../../mini-components/button/button.component';
 
 @Component({
   selector: 'app-topbar',
   standalone: true,
-  imports: [RouterModule, CommonModule, PopAlertComponent],
+  imports: [RouterModule, CommonModule, PopAlertComponent, ButtonComponent],
   templateUrl: './topbar.component.html',
   styleUrl: './topbar.component.css',
 })
@@ -24,8 +25,10 @@ export class TopbarComponent {
 
   /** Rutas globales para usar en el template */
   routes = GlobalVariables.appRoutes;
-  themes = ['dePrueba', 'inBlue', 'inWhite', 'inGreen', 'inRed']; // coinciden con el styles css
+  themes = ['dePrueba', 'inDark', 'inBlue', 'inWhite', 'inGreen', 'inRed']; // coinciden con el styles css
   currentTheme = this.themes[0];
+
+  globalVariables = GlobalVariables;
 
   // Array de links del menú
   get menuItems() {
