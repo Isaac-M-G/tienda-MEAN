@@ -1,31 +1,35 @@
-const express = require("express");
+import express, { Request, Response } from "express";
+import Product from "../models/Product";
+import { IProduct } from "../types";
+
 const router = express.Router();
-const Product = require("../models/Product");
 
 // Obtener todos los productos
-router.get("/", async (req, res) => {
+router.get("/", async (req: Request, res: Response) => {
   try {
     const products = await Product.find();
     res.json(products);
-  } catch (err) {
+  } catch (err: any) {
     res.status(500).json({ message: err.message });
   }
 });
 
 // Obtener un producto por ID
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (req: Request, res: Response): Promise<void> => {
   try {
     const product = await Product.findById(req.params.id);
-    if (!product)
-      return res.status(404).json({ message: "Producto no encontrado" });
+    if (!product) {
+      res.status(404).json({ message: "Producto no encontrado" });
+      return;
+    }
     res.json(product);
-  } catch (err) {
+  } catch (err: any) {
     res.status(500).json({ message: err.message });
   }
 });
 
 // Crear un producto
-router.post("/", async (req, res) => {
+router.post("/", async (req: Request, res: Response): Promise<void> => {
   const { name, description, imageUrl, price, category } = req.body;
 
   const newProduct = new Product({
@@ -41,31 +45,29 @@ router.post("/", async (req, res) => {
     await newProduct.validate();
     const savedProduct = await newProduct.save();
     res.status(201).json(savedProduct);
-  } catch (err) {
+  } catch (err: any) {
     if (err.name === "ValidationError") {
-      return res
-        .status(400)
-        .json({ message: "Datos inválidos: " + err.message });
+      res.status(400).json({ message: "Datos inválidos: " + err.message });
+      return;
     }
     res.status(500).json({ message: err.message });
   }
 });
 
 // Crear varios productos por postman para hacerlo rapido
-router.post("/bulk", async (req, res) => {
+router.post("/bulk", async (req: Request, res: Response) => {
   const products = req.body; // Espera un array de objetos { name, description, imageUrl, price, category }
 
   try {
     const savedProducts = await Product.insertMany(products);
     res.status(201).json(savedProducts);
-  } catch (err) {
+  } catch (err: any) {
     res.status(400).json({ message: err.message });
   }
 });
 
-
 // Actualizar un producto
-router.put("/:id", async (req, res) => {
+router.put("/:id", async (req: Request, res: Response): Promise<void> => {
   try {
     const updatedProduct = await Product.findByIdAndUpdate(
       req.params.id,
@@ -73,24 +75,28 @@ router.put("/:id", async (req, res) => {
       { new: true, runValidators: true } // valida según el schema
     );
 
-    if (!updatedProduct)
-      return res.status(404).json({ message: "Producto no encontrado" });
+    if (!updatedProduct) {
+      res.status(404).json({ message: "Producto no encontrado" });
+      return;
+    }
     res.json(updatedProduct);
-  } catch (err) {
+  } catch (err: any) {
     res.status(400).json({ message: err.message });
   }
 });
 
 // Eliminar un producto
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", async (req: Request, res: Response): Promise<void> => {
   try {
     const deletedProduct = await Product.findByIdAndDelete(req.params.id);
-    if (!deletedProduct)
-      return res.status(404).json({ message: "Producto no encontrado" });
+    if (!deletedProduct) {
+      res.status(404).json({ message: "Producto no encontrado" });
+      return;
+    }
     res.json({ message: "Producto eliminado" });
-  } catch (err) {
+  } catch (err: any) {
     res.status(500).json({ message: err.message });
   }
 });
 
-module.exports = router;
+export default router;

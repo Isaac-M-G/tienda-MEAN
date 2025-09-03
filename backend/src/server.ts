@@ -1,9 +1,12 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-const dotenv = require("dotenv");
+import express from "express";
+import mongoose from "mongoose";
+import cors from "cors";
+import dotenv from "dotenv";
+import productRoutes from "./routes/Products";
+import authRoutes from "./routes/Auth";
 
 dotenv.config();
+
 const app = express();
 const PORT = process.env.PORT || 4000;
 
@@ -12,20 +15,13 @@ app.use(express.json());
 
 // Conexión a MongoDB
 mongoose
-  .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(process.env.MONGO_URI as string)
   .then(() => console.log("✅ MongoDB conectado"))
   .catch((err) => console.log("❌ Error MongoDB:", err));
 
 // Rutas
-const productRoutes = require("./routes/Products");
 app.use("/products", productRoutes);
-
-const authRoutes = require("./routes/Auth");
 app.use("/auth", authRoutes);
-
 
 // Ruta de prueba
 app.get("/", (req, res) => {
