@@ -1,4 +1,4 @@
-<div class="flex flex-col gap-1 relative">
+<div class="flex flex-col gap-1 relative" (mouseleave)="onTouched()">
   <label *ngIf="label" class="text-[var(--text-on-bg-layout)] font-medium">
     {{ label }}
   </label>
@@ -20,12 +20,12 @@
       [innerHTML]="icon"
     ></span>
 
-    <!-- Texto seleccionado -->
+    <!-- Texto seleccionado o placeholder -->
     <span
       class="block truncate"
       [ngStyle]="{ 'padding-left': icon ? '2rem' : '0' }"
     >
-      {{ selectedLabel }}
+      {{ value ? selectedLabel : placeholder }}
     </span>
 
     <!-- Flecha -->

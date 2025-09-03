@@ -25,7 +25,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 export class SelectComponent implements ControlValueAccessor {
   @Input() label?: string;
   @Input() options: { value: any; label: string; icon?: string }[] = [];
-  @Input() placeholder: string = 'Seleccionar';
+  @Input() placeholder: string = 'Seleccione una opción';
   @Input() bgColor: string = 'transparent';
   @Input() textColor: string = 'var(--text-on-bg-layout)';
   @Input() borderColor: string = 'var(--border-color)';
@@ -61,6 +61,8 @@ export class SelectComponent implements ControlValueAccessor {
     this.value = option.value;
     this.onChange(this.value);
     this.changeEvent.emit(this.value);
+
+    this.onTouched();
   }
 
   get icon(): SafeHtml | null {

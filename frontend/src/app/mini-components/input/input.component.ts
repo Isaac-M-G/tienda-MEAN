@@ -74,6 +74,11 @@ export class InputComponent implements ControlValueAccessor {
       this.enterPressed.emit();
     }
   }
+
+  onBlur() {
+    this.onTouched();
+  }
+
   // Getter del ícono sanitizado
   get icon(): SafeHtml | null {
     if (!this.customSvg) return null;

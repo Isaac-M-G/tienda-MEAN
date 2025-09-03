@@ -11,6 +11,7 @@ import { GlobalVariables } from '../../shared/global-variables';
 })
 export class ButtonComponent {
   @Input() type: 'delete' | 'create' | 'edit' | 'goBack' | undefined;
+  @Input() htmlType: 'button' | 'submit' | 'reset' = 'button';
   @Input() label?: string;
 
   @Input() bgColor?: string;

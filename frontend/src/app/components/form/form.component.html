@@ -1,0 +1,66 @@
+<form
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+  class="m-4"
+  [ngClass]="[
+    'rounded-xl',
+    'bg-[var(--layout-bg)]',
+    'text-[var(--text-on-bg-layout)]',
+    'space-y-4',
+    'max-w-full',
+    width,
+    padding
+  ]"
+  style="box-shadow: 0 20px 25px -5px var(--shadow-color)"
+>
+  <div *ngFor="let field of fields" class="flex flex-col">
+    <label class="font-medium mb-1">{{ field.label }}</label>
+
+    <!-- Input (text / number) -->
+    <app-input
+      *ngIf="field.type !== 'select' && field.type !== 'file'"
+      [type]="field.type"
+      [formControlName]="field.name"
+      [placeholder]="field.placeholder ?? ''"
+    ></app-input>
+
+    <!-- Select -->
+    <app-select
+      *ngIf="field.type === 'select'"
+      [formControlName]="field.name"
+      [placeholder]="field.placeholder ?? 'Seleccione una opción'"
+      [options]="field.options ?? []"
+    ></app-select>
+
+    <!-- File Input -->
+    <app-file-input
+      *ngIf="field.type === 'file'"
+      [formControlName]="field.name"
+      [accept]="'image/*'"
+      [requiredMessage]="field.errorMessages?.['required']"
+    ></app-file-input>
+
+    <!-- Mensaje de error -->
+    <p
+      *ngIf="getErrorMessage(field)"
+      class="text-red-600 text-sm mt-1 font-semibold"
+    >
+      {{ getErrorMessage(field) }}
+    </p>
+  </div>
+
+  <!-- Botones -->
+  <div class="flex gap-3 mt-4">
+    <app-button
+      [htmlType]="'submit'"
+      [label]="submitLabel"
+      type="create"
+    ></app-button>
+    <app-button
+      (click)="onCancel()"
+      [label]="cancelLabel"
+      bgColor="#f44336"
+      textColor="white"
+    ></app-button>
+  </div>
+</form>

@@ -1,12 +1,4 @@
 <div class="max-w-7xl mx-auto px-4 py-8">
-  <app-select
-    [(ngModel)]="selectedValue"
-    [options]="options"
-    placeholder="Selecciona una opción"
-  ></app-select>
-
-  <p class="mt-4 text-gray-700">Opción seleccionada: {{ selectedValue }}</p>
-
   <app-filter-search
     [items]="allProducts"
     [fields]="['name', 'description']"

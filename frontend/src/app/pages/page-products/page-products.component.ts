@@ -6,8 +6,8 @@ import { CardProductComponent } from '../../components/card-product/card-product
 import { CommonModule } from '@angular/common';
 import { FilterSearchComponent } from '../../components/filter-search/filter-search.component';
 import { GlobalVariables } from '../../shared/global-variables';
-import { SelectComponent } from '../../mini-components/select/select.component';
-import { FormsModule } from '@angular/forms';
+import { FormComponent, FormField } from '../../components/form/form.component';
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-page-products',
@@ -17,18 +17,19 @@ import { FormsModule } from '@angular/forms';
     CardProductComponent,
     CommonModule,
     FilterSearchComponent,
-    SelectComponent,
-    FormsModule,
+    FormComponent,
   ],
   templateUrl: './page-products.component.html',
   styleUrls: ['./page-products.component.css'],
 })
 export class PageProductsComponent implements OnInit {
-  selectedValue: string = '';
-  options = [
-    { label: 'Opción 1', value: '1' },
-    { label: 'Opción 2', value: '2' },
-  ];
+  onSubmit(values: any) {
+    console.log('Formulario válido:', values);
+  }
+
+  onCancel() {
+    console.log('Formulario cancelado');
+  }
 
   globalVariables = GlobalVariables;
   allProducts: Product[] = [];

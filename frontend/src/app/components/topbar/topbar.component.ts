@@ -25,7 +25,12 @@ export class TopbarComponent {
 
   /** Rutas globales para usar en el template */
   routes = GlobalVariables.appRoutes;
-  themes = ['dePrueba', 'inDark', 'inBlue', 'inWhite', 'inGreen', 'inRed']; // coinciden con el styles css
+  themes = [
+    'dePrueba',
+    'inDark',
+    'inBlue',
+    // 'inWhite', 'inGreen', 'inRed'
+  ]; // coinciden con el styles css
   currentTheme = this.themes[0];
 
   globalVariables = GlobalVariables;

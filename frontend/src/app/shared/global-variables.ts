@@ -3,6 +3,7 @@ import { environment } from '../enviroment/environment';
 export const GlobalVariables = {
   /** URL base del backend */
   apiUrl: 'http://localhost:3000',
+  // apiUrl: 'https://4tlb728f-8080.use2.devtunnels.ms/',
 
   /** Llave usada en localStorage para guardar el token */
   authTokenKey: 'authToken',

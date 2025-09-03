@@ -4,35 +4,16 @@
 @tailwind utilities;
 
 /* styles.css */
-
-/* Scrollbar completa */
-::-webkit-scrollbar {
-  width: 12px; /* ancho vertical */
-  height: 12px; /* alto horizontal */
+.dePrueba,
+.inBlue,
+.inGreen,
+.inRed,
+.inWhite {
+  --shadow-color: rgba(0, 0, 0, 0.25); /* sombra negra */
 }
 
-/* Track (fondo de la barra) */
-::-webkit-scrollbar-track {
-  background: transparent; /* color de fondo del track */
-}
-
-/* Thumb (la parte que se mueve) */
-::-webkit-scrollbar-thumb {
-  background-color: transparent; /* color de la barra */
-  border-radius: 6px; /* bordes redondeados */
-  border: 3px solid var(--tertiary); /* opcional para separar del track */
-}
-
-/* Opcional: hover del thumb */
-::-webkit-scrollbar-thumb:hover {
-  background-color: var(--tertiary); /* color al pasar el ratón */
-}
-
-/* Botones de la barra (flechas) */
-::-webkit-scrollbar-button {
-  background-color: transparent; /* color de las flechas */
-  display: block; /* asegurarse de que aparezcan */
-  height: 5px;
+.inDark {
+  --shadow-color: rgba(255, 255, 255, 0.2); /* sombra blanca */
 }
 
 .dePrueba {
@@ -48,6 +29,7 @@
   --background-secondary: #f1f5f9;
 
   --text-on-bg-layout: #1f2937;
+  --text-on-bg-layout-secondary: #0964f7;
   --title-on-bg-layout: #1f2937;
   --title-on-bg-secondary: #1f2937;
 
@@ -83,6 +65,7 @@
   --background-secondary: #f1f5f9;
 
   --text-on-bg-layout: #1e293b;
+  --text-on-bg-layout-secondary: #0964f7;
   --title-on-bg-layout: #1e293b;
   --title-on-bg-secondary: #1e293b;
 
@@ -118,6 +101,7 @@
   --background-secondary: #1e293b; /* fondo de tarjetas/paneles */
 
   --text-on-bg-layout: #f8fafc;
+  --text-on-bg-layout-secondary: #0964f7;
   --title-on-bg-layout: #f8fafc;
   --title-on-bg-secondary: #e2e8f0;
 
@@ -153,6 +137,7 @@
   --background-secondary: #f3f4f6;
 
   --text-on-bg-layout: #111827;
+  --text-on-bg-layout-secondary: #0964f7;
   --title-on-bg-layout: #111827;
   --title-on-bg-secondary: #111827;
 
@@ -188,6 +173,7 @@
   --background-secondary: #ecfdf5;
 
   --text-on-bg-layout: #064e3b;
+  --text-on-bg-layout-secondary: #0964f7;
   --title-on-bg-layout: #064e3b;
   --title-on-bg-secondary: #064e3b;
 
@@ -223,6 +209,7 @@
   --background-secondary: #fff7ed;
 
   --text-on-bg-layout: #7f1d1d;
+  --text-on-bg-layout-secondary: #0964f7;
   --title-on-bg-layout: #7f1d1d;
   --title-on-bg-secondary: #78350f;
 
@@ -243,4 +230,46 @@
   --sidebar-bg-active: var(--primary);
   --sidebar-text-hover: #ffffff;
   --sidebar-bg-hover: #f87171;
+}
+
+/* Scrollbar completa */
+::-webkit-scrollbar {
+  width: 12px; /* ancho vertical */
+  height: 12px; /* alto horizontal */
+}
+
+/* Track (fondo de la barra) */
+::-webkit-scrollbar-track {
+  background: transparent; /* color de fondo del track */
+}
+
+/* Thumb (la parte que se mueve) */
+::-webkit-scrollbar-thumb {
+  background-color: transparent; /* color de la barra */
+  border-radius: 6px; /* bordes redondeados */
+  border: 3px solid var(--tertiary); /* opcional para separar del track */
+}
+
+/* Opcional: hover del thumb */
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--tertiary); /* color al pasar el ratón */
+}
+
+/* Botones de la barra (flechas) */
+::-webkit-scrollbar-button {
+  background-color: transparent; /* color de las flechas */
+  display: block; /* asegurarse de que aparezcan */
+  height: 5px;
+}
+
+/* Chrome, Safari, Edge, Opera  para el input*/
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }
