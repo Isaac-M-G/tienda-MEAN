@@ -1,18 +1,17 @@
 .card-shadow {
   box-shadow: 0 20px 25px -5px var(--shadow-color),
-              0 8px 10px -6px var(--shadow-color);
+    0 8px 10px -6px var(--shadow-color);
   transition: box-shadow 0.3s;
 }
 
 .card-shadow:hover {
   box-shadow: 0 45px 40px -20px var(--shadow-color),
-              0 20px 20px -15px var(--shadow-color);
+    0 20px 20px -15px var(--shadow-color);
 }
 
 /* Estilos para el componente de tarjeta de producto */
 .product-card {
   min-height: 350px;
-  max-height: 450px;
   transition: transform 0.2s ease-in-out;
 }
 
@@ -48,7 +47,7 @@
 }
 
 .product-price {
-  font-family: 'Courier New', monospace;
+  font-family: "Courier New", monospace;
 }
 
 .product-actions {
@@ -59,44 +58,43 @@
 @media (max-width: 768px) {
   .product-card {
     min-height: 320px;
-    max-height: 400px;
   }
-  
+
   .product-image-container {
     min-height: 120px;
     padding: 0.75rem;
   }
-  
+
   .product-image {
     height: 120px !important;
   }
-  
+
   .product-content {
     padding: 0.75rem;
     min-height: 180px;
   }
-  
+
   .product-title {
     font-size: 1.125rem !important;
     line-height: 1.25;
     min-height: 2.25rem;
   }
-  
+
   .product-description {
     font-size: 0.875rem !important;
     min-height: 2.25rem;
   }
-  
+
   .product-price {
     font-size: 1.25rem !important;
     margin-bottom: 0.75rem !important;
   }
-  
+
   .product-actions {
     gap: 0.5rem;
     min-height: 70px;
   }
-  
+
   .admin-buttons {
     flex-direction: column;
     align-items: stretch;
@@ -107,37 +105,36 @@
 @media (max-width: 640px) {
   .product-card {
     min-height: 300px;
-    max-height: 380px;
   }
-  
+
   .product-image-container {
     min-height: 110px;
     padding: 0.5rem;
   }
-  
+
   .product-image {
     height: 110px !important;
   }
-  
+
   .product-content {
     padding: 0.75rem;
     min-height: 170px;
   }
-  
+
   .product-title {
     font-size: 1rem !important;
     min-height: 2rem;
   }
-  
+
   .product-description {
     font-size: 0.8rem !important;
     min-height: 2rem;
   }
-  
+
   .product-price {
     font-size: 1.125rem !important;
   }
-  
+
   .admin-buttons {
     justify-content: center;
   }
@@ -146,22 +143,21 @@
 @media (max-width: 480px) {
   .product-card {
     min-height: 280px;
-    max-height: 360px;
   }
-  
+
   .product-image-container {
     min-height: 100px;
   }
-  
+
   .product-image {
     height: 100px !important;
   }
-  
+
   .product-content {
     padding: 0.5rem;
     min-height: 160px;
   }
-  
+
   .product-actions {
     min-height: 60px;
   }
