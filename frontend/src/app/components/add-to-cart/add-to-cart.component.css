@@ -1,0 +1,56 @@
+/* Estilos específicos para ocultar controles de número en el input */
+::ng-deep input[type="number"]::-webkit-outer-spin-button,
+::ng-deep input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+::ng-deep input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Estilos responsivos para los botones */
+.responsive-button {
+  transition: all 0.2s ease-in-out;
+}
+
+/* En pantallas pequeñas, ajustar el padding y el texto */
+@media (max-width: 640px) {
+  .responsive-button {
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.875rem;
+  }
+  
+  /* Ocultar el texto en pantallas muy pequeñas y solo mostrar el icono */
+  .responsive-button ::ng-deep .button-text {
+    display: none;
+  }
+  
+  /* Ajustar el tamaño del icono en pantallas pequeñas */
+  .responsive-button ::ng-deep .button-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .responsive-button {
+    padding: 0.375rem 0.5rem !important;
+    min-width: 2.5rem;
+  }
+}
+
+/* Estilos para el contenedor de cantidad */
+.quantity-container {
+  min-width: fit-content;
+}
+
+/* Hover effects mejorados */
+.responsive-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.responsive-button:active {
+  transform: translateY(0);
+}

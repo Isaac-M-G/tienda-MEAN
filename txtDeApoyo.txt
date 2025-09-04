@@ -1,5 +1,8 @@
 iconos sacados de https://fontawesome.com/icons
 
+git add .                                              
+>> git commit -m "creando minicomponentes"
+>> git push -u origin development
 
 ----------------------------------------------------------------------------------------
 -------------

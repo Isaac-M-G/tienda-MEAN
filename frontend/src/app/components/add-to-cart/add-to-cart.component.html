@@ -1,0 +1,74 @@
+<div class="flex items-center gap-2">
+  <!-- Selector de cantidad -->
+  <div class="flex items-center border rounded-lg overflow-hidden" 
+       style="border-color: var(--cart-border); background-color: var(--cart-item-bg);">
+    <app-button
+      (click)="decreaseQuantity()"
+      [customSvg]="globalVariables.icons.minus"
+      iconSize="16"
+      bgColor="var(--cart-hover-bg)"
+      textColor="var(--cart-text)"
+      hoverBgColor="var(--cart-border)"
+      padding="px-3 py-2"
+      [disabled]="quantity <= 1"
+    >
+    </app-button>
+    
+    <app-input
+      [(ngModel)]="quantity"
+      type="number"
+      [placeholder]="'1'"
+      padding="px-2 py-1"
+      borderColor="transparent"
+      bgColor="transparent"
+      textColor="var(--cart-text)"
+      fontSize="14px"
+      class="w-16 text-center"
+      (inputEvent)="validateQuantity()"
+    >
+    </app-input>
+    
+    <app-button
+      (click)="increaseQuantity()"
+      [customSvg]="globalVariables.icons.plus"
+      iconSize="16"
+      bgColor="var(--cart-hover-bg)"
+      textColor="var(--cart-text)"
+      hoverBgColor="var(--cart-border)"
+      padding="px-3 py-2"
+      [disabled]="quantity >= 99"
+    >
+    </app-button>
+  </div>
+
+  <!-- Botón agregar al carrito -->
+  <app-button
+    *ngIf="isLoggedIn"
+    (click)="addToCart()"
+    [customSvg]="globalVariables.icons.shoppingBag"
+    label="Agregar al carrito"
+    iconSize="18"
+    bgColor="var(--cart-button-add)"
+    textColor="white"
+    hoverBgColor="var(--cart-button-primary)"
+    [disabled]="isAdding"
+    padding="px-4 py-2"
+    class="responsive-button"
+  >
+  </app-button>
+
+  <!-- Botón para usuarios no autenticados -->
+  <app-button
+    *ngIf="!isLoggedIn"
+    (click)="goToLogin()"
+    [customSvg]="globalVariables.icons.login"
+    label="Inicia sesión para comprar"
+    iconSize="18"
+    bgColor="var(--cart-button-primary)"
+    textColor="white"
+    hoverBgColor="var(--primary)"
+    padding="px-4 py-2"
+    class="responsive-button"
+  >
+  </app-button>
+</div>

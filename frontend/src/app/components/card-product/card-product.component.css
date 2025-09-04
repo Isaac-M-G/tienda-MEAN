@@ -8,3 +8,67 @@
   box-shadow: 0 45px 40px -20px var(--shadow-color),
               0 20px 20px -15px var(--shadow-color);
 }
+
+/* Responsividad para las card de productos */
+@media (max-width: 768px) {
+  .product-card {
+    max-width: 100% !important;
+    margin: 0 0.5rem;
+  }
+  
+  .product-actions {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .admin-buttons {
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .product-image {
+    height: 120px !important;
+  }
+  
+  .product-title {
+    font-size: 1.25rem !important;
+  }
+  
+  .product-price {
+    font-size: 1.5rem !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .product-card {
+    min-height: 180px !important;
+    margin: 0 0.25rem;
+  }
+  
+  .product-content {
+    padding: 1rem !important;
+  }
+  
+  .product-image {
+    height: 100px !important;
+  }
+  
+  .product-title {
+    font-size: 1.125rem !important;
+    line-height: 1.25;
+  }
+  
+  .product-description {
+    font-size: 0.875rem !important;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .product-price {
+    font-size: 1.25rem !important;
+    margin-bottom: 0.75rem !important;
+  }
+}

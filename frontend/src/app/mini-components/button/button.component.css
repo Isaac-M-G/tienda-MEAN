@@ -1,0 +1,119 @@
+/* Estilos base para botones responsivos */
+.btn-responsive {
+  transition: all 0.2s ease-in-out;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-width: fit-content;
+  padding: 0.75rem 1.5rem; /* Padding base para pantallas grandes */
+  font-size: 1rem;
+}
+
+/* Estilos específicos por tipo de botón */
+.btn-responsive.text-and-icon {
+  padding: 0.75rem 1.5rem;
+}
+
+.btn-responsive.icon-only {
+  padding: 0.75rem;
+  min-width: 3rem;
+}
+
+.btn-responsive.text-only {
+  padding: 0.75rem 1.5rem;
+}
+
+/* Ajustes para pantallas medianas */
+@media (max-width: 768px) {
+  .btn-responsive {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.875rem;
+  }
+  
+  .btn-responsive.text-and-icon {
+    padding: 0.625rem 1.25rem;
+  }
+  
+  .btn-responsive.icon-only {
+    padding: 0.625rem;
+    min-width: 2.5rem;
+  }
+  
+  .btn-responsive.text-only {
+    padding: 0.625rem 1.25rem;
+  }
+  
+  .btn-responsive .button-text {
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 640px) {
+  .btn-responsive {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+  
+  .btn-responsive.text-and-icon {
+    padding: 0.5rem 1rem;
+  }
+  
+  .btn-responsive.icon-only {
+    padding: 0.5rem;
+    min-width: 2.25rem;
+  }
+  
+  .btn-responsive.text-only {
+    padding: 0.5rem 1rem;
+  }
+  
+  .btn-responsive .button-text {
+    max-width: 80px;
+  }
+}
+
+/* Ajustes para pantallas muy pequeñas */
+@media (max-width: 480px) {
+  .btn-responsive.text-and-icon .button-text {
+    display: none;
+  }
+  
+  .btn-responsive.text-and-icon {
+    padding: 0.5rem;
+    min-width: 2.5rem;
+  }
+  
+  .btn-responsive.icon-only {
+    padding: 0.5rem;
+    min-width: 2.25rem;
+  }
+  
+  .btn-responsive.text-only {
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+/* Estados hover mejorados */
+.btn-responsive:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-responsive:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-responsive:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}

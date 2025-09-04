@@ -1,8 +1,17 @@
 <button
-  class="flex items-center rounded-lg gap-1 transition-colors"
+  [class]="
+    'btn-responsive flex items-center rounded-lg gap-1 transition-colors ' +
+    padding +
+    ' ' +
+    (isSelected ? 'bg-primary text-white' : '')
+  "
+  [ngClass]="{
+    'text-and-icon': (label || text) && icon,
+    'icon-only': !(label || text) && icon,
+    'text-only': (label || text) && !icon
+  }"
   [type]="htmlType"
   [disabled]="disabled"
-  [ngClass]="padding"
   [ngStyle]="{
     'background-color': hover
       ? hoverBgColor ?? hoverColor(background)
@@ -16,7 +25,11 @@
   (mouseleave)="hover = false"
 >
   <span class="inline-flex items-center gap-2">
-    <span *ngIf="icon" [innerHTML]="icon" class="pointer-events-none"></span>
-    <span *ngIf="label">{{ label }}</span>
+    <span
+      *ngIf="icon"
+      [innerHTML]="icon"
+      class="button-icon pointer-events-none"
+    ></span>
+    <span *ngIf="label || text" class="button-text">{{ label || text }}</span>
   </span>
 </button>
