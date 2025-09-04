@@ -7,6 +7,7 @@ import { AuthService } from '../../service/auth.service';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../../mini-components/button/button.component';
 import { PopAlertService } from '../../service/pop-alert.service';
+import { AlertService } from '../../service/alert.service';
 import { AddToCartComponent } from '../add-to-cart/add-to-cart.component';
 import { Product } from '../../interfaces/product.interface';
 @Component({
@@ -19,6 +20,7 @@ import { Product } from '../../interfaces/product.interface';
 export class CardProductComponent {
   isAdmin = false;
   GlobalVariables = GlobalVariables;
+  isHidden = false; // Nueva propiedad para controlar visibilidad
 
   @Input() id!: string;
   @Input() title: string = '';
@@ -32,7 +34,8 @@ export class CardProductComponent {
     private firebaseService: FirebaseService,
     private router: Router,
     private authService: AuthService,
-    private popAlertService: PopAlertService
+    private popAlertService: PopAlertService,
+    private alertService: AlertService
   ) {
     const user = this.authService.getUserInfo();
     this.isAdmin = user?.role === 'admin';
@@ -45,23 +48,31 @@ export class CardProductComponent {
     }
 
     const confirmed = await this.popAlertService.confirm({
-      message: '¿Seguro que quieres borrar el producto?',
-      confirmText: 'Sí',
-      cancelText: 'No',
+      message: '¿Seguro que quieres eliminar este producto?',
+      confirmText: 'Sí, eliminar',
+      cancelText: 'Cancelar',
     });
 
     if (!confirmed) return;
 
     this.productService.deleteProduct(this.id).subscribe({
       next: async () => {
-        //  eliminar la imagen en Firebase
+        console.log(`Producto con id ${this.id} borrado`);
+
+        // Eliminar la imagen en Firebase
         if (this.imageUrl) {
           await this.firebaseService.deleteImage(this.imageUrl);
         }
+
+        // Mostrar mensaje de éxito
+        this.alertService.show('Producto eliminado correctamente', 'success');
+        
+        // Ocultar la tarjeta sin mostrar "[Eliminado]"
         this.hideCard();
       },
       error: (err) => {
         console.error('Error al borrar el producto', err);
+        this.alertService.show('Error al eliminar el producto', 'error');
       },
     });
   }
@@ -84,11 +95,8 @@ export class CardProductComponent {
   }
 
   hideCard() {
-    // Forma simple: marcar el card como eliminado
-    this.title = '[Eliminado]';
-    this.description = '';
-    this.price = 0;
-    this.imageUrl = '';
+    // Ocultar completamente la tarjeta
+    this.isHidden = true;
   }
 
   getProduct(): Product {

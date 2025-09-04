@@ -7,6 +7,7 @@ import { Cart, CartItem } from '../../interfaces/cart.interface';
 import { ButtonComponent } from '../../mini-components/button/button.component';
 import { InputComponent } from '../../mini-components/input/input.component';
 import { AlertService } from '../../service/alert.service';
+import { PopAlertService } from '../../service/pop-alert.service';
 import { GlobalVariables } from '../../shared/global-variables';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -34,6 +35,7 @@ export class CartComponent implements OnInit, OnDestroy {
     private cartService: CartService,
     private authService: AuthService,
     private alertService: AlertService,
+    private popAlertService: PopAlertService,
     private router: Router
   ) {}
 
@@ -48,7 +50,7 @@ export class CartComponent implements OnInit, OnDestroy {
     const authSub = this.authService.user$.subscribe(user => {
       this.isLoggedIn = !!user;
       if (!user) {
-        this.router.navigate(['/login']);
+        this.router.navigate([GlobalVariables.appRoutes.login]);
       }
     });
     this.subscriptions.push(authSub);
@@ -67,23 +69,39 @@ export class CartComponent implements OnInit, OnDestroy {
     this.cartService.updateQuantity(productId, quantity);
   }
 
-  removeFromCart(productId: string): void {
+  async removeFromCart(productId: string): Promise<void> {
+    const confirmed = await this.popAlertService.confirm({
+      message: '¿Seguro que quieres eliminar este producto del carrito?',
+      confirmText: 'Sí, eliminar',
+      cancelText: 'Cancelar',
+    });
+
+    if (!confirmed) return;
+
     this.cartService.removeFromCart(productId);
-    this.alertService.show('Producto eliminado del carrito', 'success');
+    this.alertService.show('Producto eliminado del carrito correctamente', 'success');
   }
 
-  clearCart(): void {
+  async clearCart(): Promise<void> {
+    const confirmed = await this.popAlertService.confirm({
+      message: '¿Seguro que quieres vaciar todo el carrito?',
+      confirmText: 'Sí, vaciar',
+      cancelText: 'Cancelar',
+    });
+
+    if (!confirmed) return;
+
     this.cartService.clearCart();
-    this.alertService.show('Carrito vacío', 'success');
+    this.alertService.show('Carrito vaciado correctamente', 'success');
   }
 
   goToProducts(): void {
-    this.router.navigate(['/']);
+    this.router.navigate([GlobalVariables.appRoutes.products.default]);
   }
 
   goToProduct(productId: string): void {
-    this.router.navigate(['/products', productId]);
-  }
+    this.router.navigate([GlobalVariables.appRoutes.products.details(productId)]);
+  } 
 
   checkout(): void {
     // Por ahora solo mostramos un mensaje
