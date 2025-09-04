@@ -3,27 +3,27 @@
   (dblclick)="goToDetail()"
 > -->
 <div
-  class="bg-[var(--layout-bg)] rounded-2xl overflow-hidden max-w-[800px] min-h-[200px] mx-auto flex flex-col cursor-pointer card-shadow"
+  class="product-card bg-[var(--layout-bg)] rounded-2xl overflow-hidden w-full h-full flex flex-col cursor-pointer card-shadow"
   (dblclick)="goToDetail()"
 >
   <!-- Imagen -->
-  <div class="flex justify-center items-center">
+  <div class="product-image-container flex justify-center items-center p-4">
     <img
       [src]="imageUrl"
       alt="{{ title }}"
-      class="h-[150px] w-auto object-contain"
+      class="product-image h-[140px] w-auto object-contain max-w-full"
     />
   </div>
 
   <!-- Contenido -->
-  <div class="p-6 flex flex-col flex-grow">
+  <div class="product-content p-4 flex flex-col flex-grow">
     <!-- Título -->
-    <span class="text-2xl font-bold tracking-wide text-gray-900 mb-2">
+    <span class="product-title text-xl font-bold tracking-wide text-gray-900 mb-2 line-clamp-2">
       {{ title }}
     </span>
 
     <!-- Descripción -->
-    <p class="text-gray-600 mb-2 line-clamp-3">
+    <p class="product-description text-gray-600 mb-3 text-sm line-clamp-2 flex-grow">
       {{ description }}
     </p>
 
@@ -33,17 +33,17 @@
     </p> -->
 
     <!-- Precio -->
-    <p class="text-2xl font-mono font-extrabold text-green-600 mb-4">
+    <p class="product-price text-xl font-mono font-extrabold text-green-600 mb-3">
       ${{ price }}
     </p>
 
     <!-- Acciones -->
-    <div class="mt-auto flex flex-col gap-3">
+    <div class="product-actions mt-auto flex flex-col gap-2">
       <!-- Agregar al carrito -->
       <app-add-to-cart [product]="getProduct()"></app-add-to-cart>
       
       <!-- Botones de navegación y admin -->
-      <div class="flex items-center justify-between">
+      <div class="admin-buttons flex items-center justify-between">
         <!-- Botón ver más -->
         <app-button
           (click)="goToDetail()"
@@ -54,7 +54,7 @@
         </app-button>
 
         <!-- Botones admin -->
-        <div class="flex gap-2" *ngIf="isAdmin">
+        <div class="flex gap-1" *ngIf="isAdmin">
           <app-button type="edit" (click)="onEdit()"></app-button>
           <app-button type="delete" (click)="onDelete()"></app-button>
         </div>

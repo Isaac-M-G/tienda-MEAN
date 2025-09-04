@@ -28,8 +28,8 @@
   </h1>
 
   <!-- Grid de productos -->
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-10">
-    <div *ngFor="let product of filteredProducts">
+  <div class="products-grid mb-10">
+    <div *ngFor="let product of filteredProducts" class="product-card-wrapper">
       <app-card-product
         [id]="product._id!"
         [title]="product.name"
