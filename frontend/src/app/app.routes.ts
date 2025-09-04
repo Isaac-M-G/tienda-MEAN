@@ -9,6 +9,7 @@ import { CreateProductComponent } from './pages/create-product/create-product.co
 import { EditProductComponent } from './pages/edit-product/edit-product.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { SingleProductComponent } from './pages/single-product/single-product.component';
+import { CartComponent } from './pages/cart/cart.component';
 
 export const routes: Routes = [
   { path: GlobalVariables.appRoutes.home, component: PageProductsComponent },
@@ -24,6 +25,11 @@ export const routes: Routes = [
   {
     path: `${GlobalVariables.appRoutes.products.detailsBase}/:id`,
     component: SingleProductComponent,
+  },
+  {
+    path: 'cart',
+    component: CartComponent,
+    canActivate: [AuthGuard],
   },
 
   //auth

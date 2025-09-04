@@ -38,20 +38,26 @@
     </p>
 
     <!-- Acciones -->
-    <div class="mt-auto flex items-center justify-between">
-      <!-- Botón ver más -->
-      <app-button
-        (click)="goToDetail()"
-        label="Ver más"
-        hoverBgColor="black"
-        hoverTextColor="white"
-      >
-      </app-button>
+    <div class="mt-auto flex flex-col gap-3">
+      <!-- Agregar al carrito -->
+      <app-add-to-cart [product]="getProduct()"></app-add-to-cart>
+      
+      <!-- Botones de navegación y admin -->
+      <div class="flex items-center justify-between">
+        <!-- Botón ver más -->
+        <app-button
+          (click)="goToDetail()"
+          label="Ver más"
+          hoverBgColor="black"
+          hoverTextColor="white"
+        >
+        </app-button>
 
-      <!-- Botones admin -->
-      <div class="flex gap-2" *ngIf="isAdmin">
-        <app-button type="edit" (click)="onEdit()"></app-button>
-        <app-button type="delete" (click)="onDelete()"></app-button>
+        <!-- Botones admin -->
+        <div class="flex gap-2" *ngIf="isAdmin">
+          <app-button type="edit" (click)="onEdit()"></app-button>
+          <app-button type="delete" (click)="onDelete()"></app-button>
+        </div>
       </div>
     </div>
   </div>

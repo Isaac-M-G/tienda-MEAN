@@ -40,6 +40,22 @@
 
   --border-color: var(--primary);
 
+  /* Variables específicas del carrito */
+  --cart-bg: var(--layout-bg);
+  --cart-item-bg: var(--layout-bg);
+  --cart-text: var(--text-on-bg-layout);
+  --cart-text-secondary: var(--text-on-bg-layout-secondary);
+  --cart-button-add: #10b981; /* verde para agregar */
+  --cart-button-remove: #ef4444; /* rojo para eliminar */
+  --cart-button-primary: var(--primary);
+  --cart-button-secondary: var(--background-secondary);
+  --cart-button-danger: #ef4444;
+  --cart-border: #e5e7eb;
+  --cart-hover-bg: #f9fafb;
+  --cart-input-bg: var(--layout-bg);
+  --cart-counter-bg: #ef4444;
+  --cart-counter-text: #ffffff;
+
   --topbar-bg: var(--primary);
   --topbar-text: #ffffff;
   --topbar-text-hover: #facc15;
@@ -75,6 +91,22 @@
   --button-text: #ffffff;
 
   --border-color: var(--primary);
+
+  /* Variables específicas del carrito */
+  --cart-bg: var(--layout-bg);
+  --cart-item-bg: var(--layout-bg);
+  --cart-text: var(--text-on-bg-layout);
+  --cart-text-secondary: var(--text-on-bg-layout-secondary);
+  --cart-button-add: #10b981; /* verde para agregar */
+  --cart-button-remove: #ef4444; /* rojo para eliminar */
+  --cart-button-primary: var(--primary);
+  --cart-button-secondary: var(--background-secondary);
+  --cart-button-danger: #ef4444;
+  --cart-border: #cbd5e1; /* azul grisáceo claro */
+  --cart-hover-bg: #f1f5f9;
+  --cart-input-bg: var(--layout-bg);
+  --cart-counter-bg: #dc2626;
+  --cart-counter-text: #ffffff;
 
   --topbar-bg: var(--primary);
   --topbar-text: #ffffff;
@@ -112,6 +144,22 @@
 
   --border-color: #1369e2;
 
+  /* Variables específicas del carrito */
+  --cart-bg: var(--background-secondary);
+  --cart-item-bg: var(--layout-bg);
+  --cart-text: var(--text-on-bg-layout);
+  --cart-text-secondary: #64748b;
+  --cart-button-add: #10b981; /* verde para agregar */
+  --cart-button-remove: #ef4444; /* rojo para eliminar */
+  --cart-button-primary: #2563eb;
+  --cart-button-secondary: var(--background-secondary);
+  --cart-button-danger: #ef4444;
+  --cart-border: #374151;
+  --cart-hover-bg: #374151;
+  --cart-input-bg: var(--layout-bg);
+  --cart-counter-bg: #dc2626;
+  --cart-counter-text: #ffffff;
+
   --topbar-bg: #1e293b;
   --topbar-text: #f8fafc;
   --topbar-text-hover: #60a5fa;
@@ -147,6 +195,22 @@
   --button-text: #111827;
 
   --border-color: var(--primary);
+
+  /* Variables específicas del carrito */
+  --cart-bg: var(--layout-bg);
+  --cart-item-bg: var(--layout-bg);
+  --cart-text: var(--text-on-bg-layout);
+  --cart-text-secondary: #6b7280;
+  --cart-button-add: #10b981; /* verde para agregar */
+  --cart-button-remove: #ef4444; /* rojo para eliminar */
+  --cart-button-primary: #6b7280;
+  --cart-button-secondary: var(--background-secondary);
+  --cart-button-danger: #ef4444;
+  --cart-border: #e5e7eb;
+  --cart-hover-bg: #f9fafb;
+  --cart-input-bg: var(--layout-bg);
+  --cart-counter-bg: #dc2626;
+  --cart-counter-text: #ffffff;
 
   --topbar-bg: var(--primary);
   --topbar-text: #111827;
@@ -184,6 +248,22 @@
 
   --border-color: var(--primary);
 
+  /* Variables específicas del carrito */
+  --cart-bg: var(--layout-bg);
+  --cart-item-bg: var(--layout-bg);
+  --cart-text: var(--text-on-bg-layout);
+  --cart-text-secondary: var(--text-on-bg-layout-secondary);
+  --cart-button-add: #10b981; /* verde para agregar */
+  --cart-button-remove: #ef4444; /* rojo para eliminar */
+  --cart-button-primary: var(--primary);
+  --cart-button-secondary: var(--background-secondary);
+  --cart-button-danger: #ef4444;
+  --cart-border: #bbf7d0;
+  --cart-hover-bg: #ecfdf5;
+  --cart-input-bg: var(--layout-bg);
+  --cart-counter-bg: #dc2626;
+  --cart-counter-text: #ffffff;
+
   --topbar-bg: var(--primary);
   --topbar-text: #ffffff;
   --topbar-text-hover: #22c55e;
@@ -219,6 +299,22 @@
   --button-text: #ffffff;
 
   --border-color: var(--primary);
+
+  /* Variables específicas del carrito */
+  --cart-bg: var(--layout-bg);
+  --cart-item-bg: var(--layout-bg);
+  --cart-text: var(--text-on-bg-layout);
+  --cart-text-secondary: var(--text-on-bg-layout-secondary);
+  --cart-button-add: #10b981; /* verde para agregar */
+  --cart-button-remove: #ef4444; /* rojo para eliminar */
+  --cart-button-primary: var(--primary);
+  --cart-button-secondary: var(--background-secondary);
+  --cart-button-danger: #dc2626;
+  --cart-border: #fef3c7;
+  --cart-hover-bg: #fff7ed;
+  --cart-input-bg: var(--layout-bg);
+  --cart-counter-bg: #dc2626;
+  --cart-counter-text: #ffffff;
 
   --topbar-bg: var(--primary);
   --topbar-text: #ffffff;

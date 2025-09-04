@@ -4,16 +4,18 @@ import { CommonModule } from '@angular/common';
 import { ProductService } from '../../service/product.service';
 import { GlobalVariables } from '../../shared/global-variables';
 import { ButtonComponent } from '../../mini-components/button/button.component';
+import { AddToCartComponent } from '../../components/add-to-cart/add-to-cart.component';
+import { Product } from '../../interfaces/product.interface';
 
 @Component({
   selector: 'app-single-product',
   standalone: true,
-  imports: [CommonModule, ButtonComponent],
+  imports: [CommonModule, ButtonComponent, AddToCartComponent],
   templateUrl: './single-product.component.html',
   styleUrls: ['./single-product.component.css'],
 })
 export class SingleProductComponent implements OnInit {
-  product: any = null;
+  product: Product | null = null;
 
   constructor(
     private route: ActivatedRoute,

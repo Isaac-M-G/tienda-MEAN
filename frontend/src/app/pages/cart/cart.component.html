@@ -1,0 +1,252 @@
+<div class="min-h-screen" style="background-color: var(--bg-layout);">
+  <div class="container mx-auto px-4 py-8 max-w-6xl">
+    
+    <!-- Título del carrito -->
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold" style="color: var(--cart-text);">
+        Carrito de Compras
+      </h1>
+    </div>
+
+    <!-- Mensaje cuando no hay productos -->
+    <div *ngIf="!hasItems && isLoggedIn" class="text-center py-16">
+      <div 
+        class="p-8 rounded-lg shadow-lg max-w-md mx-auto"
+        style="background-color: var(--cart-bg); border: 1px solid var(--cart-border);"
+      >
+        <div class="w-24 h-24 mx-auto mb-6 flex items-center justify-center rounded-full" 
+             style="background-color: var(--cart-hover-bg);">
+          <div [innerHTML]="globalVariables.icons.shoppingBag" 
+               class="w-12 h-12" 
+               style="color: var(--cart-text-secondary);"></div>
+        </div>
+        <h2 class="text-xl font-semibold mb-4" style="color: var(--cart-text);">
+          Tu carrito está vacío
+        </h2>
+        <p class="mb-6" style="color: var(--cart-text-secondary);">
+          ¡Añade algunos productos para comenzar tu compra!
+        </p>
+        <app-button
+          (click)="goToProducts()"
+          bgColor="var(--cart-button-primary)"
+          textColor="white"
+          padding="px-6 py-3"
+          text="Explorar Productos"
+          class="w-full"
+        >
+        </app-button>
+      </div>
+    </div>
+
+    <!-- Lista de productos en el carrito -->
+    <div *ngIf="hasItems && isLoggedIn" class="space-y-6">
+      
+      <!-- Items del carrito -->
+      <div 
+        class="cart-items-container rounded-lg shadow-lg"
+        style="background-color: var(--cart-bg); border: 1px solid var(--cart-border);"
+      >
+        <div class="p-6">
+          <h2 class="text-xl font-semibold mb-6" style="color: var(--cart-text);">
+            Productos en tu carrito
+          </h2>
+          
+          <div class="space-y-4">
+            <div 
+              class="p-6 flex items-center space-x-4 cart-item rounded-lg transition-all hover:opacity-95"
+              style="border: 1px solid var(--cart-border); background-color: var(--cart-item-bg);"
+              *ngFor="let item of cart.items; trackBy: trackByProductId"
+            >
+              <!-- Imagen del producto -->
+              <div class="flex-shrink-0 w-20 h-20">
+                <img 
+                  [src]="item.product.imageUrl" 
+                  [alt]="item.product.name"
+                  class="w-full h-full object-cover rounded-md"
+                >
+              </div>
+              
+              <!-- Información del producto -->
+              <div class="flex-1 min-w-0">
+                <h3 
+                  class="text-lg font-medium cursor-pointer transition-colors hover:opacity-80"
+                  style="color: var(--cart-text);"
+                  (click)="goToProduct(item.product._id!)"
+                >
+                  {{ item.product.name }}
+                </h3>
+                <p class="text-sm mt-1 line-clamp-2" style="color: var(--cart-text-secondary);">
+                  {{ item.product.description }}
+                </p>
+                <p class="text-lg font-semibold mt-2" style="color: var(--cart-text);">
+                  ${{ item.product.price.toFixed(2) }}
+                </p>
+              </div>
+              
+              <!-- Controles de cantidad -->
+              <div class="flex items-center space-x-3">
+                <!-- Botón disminuir -->
+                <app-button
+                  (click)="updateQuantity(item.product._id!, item.quantity - 1)"
+                  [customSvg]="globalVariables.icons.minus"
+                  iconSize="16"
+                  bgColor="var(--cart-hover-bg)"
+                  textColor="var(--cart-text)"
+                  padding="p-2"
+                  [disabled]="item.quantity <= 1"
+                  class="hover:opacity-80"
+                >
+                </app-button>
+                
+                <!-- Input de cantidad -->
+                <app-input
+                  [ngModel]="item.quantity.toString()"
+                  type="number"
+                  borderColor="var(--cart-border)"
+                  bgColor="var(--cart-input-bg)"
+                  textColor="var(--cart-text)"
+                  padding="px-3 py-2"
+                  fontSize="14px"
+                  class="w-20 text-center"
+                  (inputEvent)="onQuantityChange(item.product._id!, $event)"
+                  min="1"
+                  max="99"
+                >
+                </app-input>
+                
+                <!-- Botón aumentar -->
+                <app-button
+                  (click)="updateQuantity(item.product._id!, item.quantity + 1)"
+                  [customSvg]="globalVariables.icons.plus"
+                  iconSize="16"
+                  bgColor="var(--cart-hover-bg)"
+                  textColor="var(--cart-text)"
+                  padding="p-2"
+                  [disabled]="item.quantity >= 99"
+                  class="hover:opacity-80"
+                >
+                </app-button>
+              </div>
+              
+              <!-- Subtotal y eliminar -->
+              <div class="text-right space-y-3">
+                <p class="text-lg font-bold" style="color: var(--cart-text);">
+                  ${{ item.subtotal.toFixed(2) }}
+                </p>
+                <app-button
+                  (click)="removeFromCart(item.product._id!)"
+                  [customSvg]="globalVariables.icons.delete"
+                  iconSize="16"
+                  bgColor="var(--cart-button-danger)"
+                  textColor="white"
+                  padding="p-2"
+                  class="hover:opacity-80"
+                >
+                </app-button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resumen del carrito -->
+      <div class="grid md:grid-cols-2 gap-6">
+        
+        <!-- Resumen de productos -->
+        <div 
+          class="p-6 rounded-lg shadow-lg"
+          style="background-color: var(--cart-bg); border: 1px solid var(--cart-border);"
+        >
+          <h3 class="text-lg font-semibold mb-4" style="color: var(--cart-text);">
+            Resumen del Pedido
+          </h3>
+          <div class="space-y-3">
+            <div class="flex justify-between">
+              <span style="color: var(--cart-text-secondary);">Productos ({{ cart.itemCount }})</span>
+              <span style="color: var(--cart-text);">${{ formattedTotal }}</span>
+            </div>
+            <div class="border-t pt-3" style="border-color: var(--cart-border);">
+              <div class="flex justify-between text-xl font-bold">
+                <span style="color: var(--cart-text);">Total:</span>
+                <span style="color: var(--cart-text);">${{ formattedTotal }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Acciones del carrito -->
+        <div 
+          class="p-6 rounded-lg shadow-lg space-y-4"
+          style="background-color: var(--cart-bg); border: 1px solid var(--cart-border);"
+        >
+          <h3 class="text-lg font-semibold" style="color: var(--cart-text);">
+            Acciones
+          </h3>
+          
+          <app-button
+            (click)="checkout()"
+            bgColor="var(--cart-button-primary)"
+            textColor="white"
+            padding="px-6 py-3"
+            text="Proceder al Checkout"
+            class="w-full hover:opacity-90"
+          >
+          </app-button>
+          
+          <app-button
+            (click)="goToProducts()"
+            bgColor="var(--cart-button-secondary)"
+            textColor="var(--cart-text)"
+            padding="px-6 py-3"
+            text="Continuar Comprando"
+            class="w-full hover:opacity-90"
+          >
+          </app-button>
+          
+          <app-button
+            (click)="clearCart()"
+            [customSvg]="globalVariables.icons.delete"
+            iconSize="16"
+            bgColor="var(--cart-button-danger)"
+            textColor="white"
+            padding="px-6 py-3"
+            text="Vaciar Carrito"
+            class="w-full hover:opacity-90"
+          >
+          </app-button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mensaje para usuarios no autenticados -->
+    <div *ngIf="!isLoggedIn" class="text-center py-16">
+      <div 
+        class="p-8 rounded-lg shadow-lg max-w-md mx-auto"
+        style="background-color: var(--cart-bg); border: 1px solid var(--cart-border);"
+      >
+        <div class="w-24 h-24 mx-auto mb-6 flex items-center justify-center rounded-full" 
+             style="background-color: var(--cart-hover-bg);">
+          <div [innerHTML]="globalVariables.icons.login" 
+               class="w-12 h-12" 
+               style="color: var(--cart-text-secondary);"></div>
+        </div>
+        <h2 class="text-xl font-semibold mb-4" style="color: var(--cart-text);">
+          Inicia sesión para ver tu carrito
+        </h2>
+        <p class="mb-6" style="color: var(--cart-text-secondary);">
+          Necesitas iniciar sesión para gestionar tus productos del carrito.
+        </p>
+        <app-button
+          (click)="goToProducts()"
+          bgColor="var(--cart-button-primary)"
+          textColor="white"
+          padding="px-6 py-3"
+          text="Ir a Productos"
+          class="w-full"
+        >
+        </app-button>
+      </div>
+    </div>
+
+  </div>
+</div>

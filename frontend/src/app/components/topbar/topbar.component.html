@@ -37,6 +37,29 @@
       </a>
     </li>
 
+    <!-- Carrito -->
+    <li *ngIf="isLoggedIn()" class="relative">
+      <app-button
+        (click)="goToCart()"
+        [customSvg]="globalVariables.icons.cart"
+        iconSize="24"
+        bgColor="transparent"
+        hoverBgColor="var(--secondary)"
+        hoverTextColor="var(--text-on-bg-secondary)"
+        padding="p-2"
+        title="Carrito de compras"
+      ></app-button>
+      
+      <!-- Badge del contador -->
+      <span 
+        *ngIf="getCartItemCount() > 0"
+        class="absolute -top-1 -right-1 rounded-full h-5 w-5 flex items-center justify-center font-bold text-xs"
+        style="background-color: var(--cart-counter-bg); color: var(--cart-counter-text);"
+      >
+        {{ getCartItemCount() > 99 ? '99+' : getCartItemCount() }}
+      </span>
+    </li>
+
     <!-- Botón de configuración con dropdown -->
     <li class="relative">
       <app-button

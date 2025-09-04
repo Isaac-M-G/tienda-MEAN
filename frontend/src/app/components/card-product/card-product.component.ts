@@ -7,10 +7,12 @@ import { AuthService } from '../../service/auth.service';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../../mini-components/button/button.component';
 import { PopAlertService } from '../../service/pop-alert.service';
+import { AddToCartComponent } from '../add-to-cart/add-to-cart.component';
+import { Product } from '../../interfaces/product.interface';
 @Component({
   selector: 'app-card-product',
   standalone: true,
-  imports: [CommonModule, ButtonComponent],
+  imports: [CommonModule, ButtonComponent, AddToCartComponent],
   templateUrl: './card-product.component.html',
   styleUrls: ['./card-product.component.css'],
 })
@@ -87,5 +89,16 @@ export class CardProductComponent {
     this.description = '';
     this.price = 0;
     this.imageUrl = '';
+  }
+
+  getProduct(): Product {
+    return {
+      _id: this.id,
+      name: this.title,
+      description: this.description,
+      price: this.price,
+      imageUrl: this.imageUrl,
+      category: this.category as 'audifonos' | 'monitores' | 'teclados' | 'cables' | null
+    };
   }
 }

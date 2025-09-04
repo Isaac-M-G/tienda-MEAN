@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { GlobalVariables } from '../../shared/global-variables';
 import { AuthService } from '../../service/auth.service';
+import { CartService } from '../../service/cart.service';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { PopAlertComponent } from '../pop-alert/pop-alert.component';
@@ -69,6 +70,7 @@ export class TopbarComponent {
 
   constructor(
     private auth: AuthService,
+    private cartService: CartService,
     private router: Router,
     private popAlertService: PopAlertService,
     private renderer: Renderer2
@@ -128,5 +130,14 @@ export class TopbarComponent {
 
   goToProfile() {
     this.router.navigate([this.routes.home]);
+  }
+
+  // Métodos del carrito
+  getCartItemCount(): number {
+    return this.cartService.getCartItemCount();
+  }
+
+  goToCart(): void {
+    this.router.navigate(['/cart']);
   }
 }

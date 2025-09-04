@@ -13,6 +13,7 @@ export class ButtonComponent {
   @Input() type: 'delete' | 'create' | 'edit' | 'goBack' | undefined;
   @Input() htmlType: 'button' | 'submit' | 'reset' = 'button';
   @Input() label?: string;
+  @Input() disabled: boolean = false;
 
   @Input() bgColor?: string;
   @Input() textColor?: string;
